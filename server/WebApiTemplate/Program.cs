@@ -2,6 +2,7 @@ using EmeraldChameleonChat.Services.Model.Entity;
 using EmeraldChameleonChat.Services;
 using Serilog;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using EmeraldChameleonChat.Hubs;
 
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Debug()
