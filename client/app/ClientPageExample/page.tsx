@@ -1,6 +1,17 @@
 'use client'
+import { useEffect } from 'react'
 
 const PageOneExample = () => {
+  const ExampleAPIRoute = () => {
+    fetch('/api/ExampleAPIRoute').then((res) => {
+      console.log(res)
+    })
+  }
+
+  useEffect(() => {
+    ExampleAPIRoute()
+  }, [])
+
   return (
     <div>
       <h1>This is the /ClientPageExample route</h1>
