@@ -1,8 +1,6 @@
 ﻿using EmeraldChameleonChat.Services.DAL.DbContexts;
 using EmeraldChameleonChat.Services.DAL.Repository.RepositoryInterfaces;
 using EmeraldChameleonChat.Services.DAL.Repository;
-using EmeraldChameleonChat.Services.Repository;
-using EmeraldChameleonChat.Services.Services.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
