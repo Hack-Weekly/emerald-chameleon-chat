@@ -12,13 +12,13 @@ const PageOneExample = () => {
     ExampleAPIRoute()
   }, [])
 
+  const h1Text =
+    "This is a client rendered page, because it does have 'use client' at the the top of this file"
+
   return (
     <div>
       <h1>This is the /ClientPageExample route</h1>
-      <h1>
-        This is a client rendered page, because it does have &#39use client&#39 at
-        the top of this file
-      </h1>
+      <h1>{h1Text}</h1>
     </div>
   )
 }

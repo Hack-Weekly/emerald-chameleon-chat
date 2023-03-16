@@ -7,7 +7,7 @@
   ],
   "rules": {
     "eqeqeq": "error",
-    "prettier/prettier": ["warn", { "endOfLine": "auto" }],
+    "prettier/prettier": "warn",
     "space-before-function-paren": ["error", {
       "anonymous": "always",
       "named": "never",
