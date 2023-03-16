@@ -38,3 +38,31 @@ update-database
 ```
 
 TODO: Configuration files for dev/prod connection strings.
+
+# Working in Client (Next JS Guidelines)
+
+## Creating Components
+components/newComponent - Valid name of folder
+components/newComponent/NewComponent.tsx - Valid name of the component.
+components/newComponent/NewComponent.module.scss - This is the 'local' styles sheet for this component.
+
+## Creating Pages
+
+app/ This is the directory for the index file.
+app/page.tsx This is the 'Page'. In Next JS this is basically a component, that gets passed to the Layout.tsx file.
+app/layout.tsx This is the layout of the page that is in the same base folder.
+app/layout.tsx This is the Root Layout of the application. Anything you do here will be global across the app
+example:
+In app/layout.tsx if you import a component for making a cool background, it will persist across the whole application, and all layouts.
+
+app/NewFolder This is a new page with route /NewFolder.
+app/NewFolder/page.tsx This is the 'Page' that will populate the route.
+app/NewFolder/layout.tsx This is the 'Local' layout for the page.
+
+## Running Next JS
+
+npm run dev
+
+# TODO: Finish 'Working in Client (Next JS Guidelines) and make it not suck
+
+
