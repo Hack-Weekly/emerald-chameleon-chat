@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
-using EmeraldChameleonChat.DAL.Repository.RepositoryInterfaces;
-using EmeraldChameleonChat.Model.DTO;
-using EmeraldChameleonChat.DAL.Repository;
-using EmeraldChameleonChat.AutoMapperProfiles;
-using EmeraldChameleonChat.Model.Entity;
+using EmeraldChameleonChat.Services.DAL.Repository.RepositoryInterfaces;
+using EmeraldChameleonChat.Services.Model.DTO;
+using EmeraldChameleonChat.Services.DAL.Repository;
+using EmeraldChameleonChat.Services.AutoMapperProfiles;
+using EmeraldChameleonChat.Services.Model.Entity;
 
 namespace EmeraldChameleonChat.Controllers
 {

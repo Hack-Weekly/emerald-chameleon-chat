@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace EmeraldChameleonChat.Model.Entity
+namespace EmeraldChameleonChat.Services.Model.Entity
 {
     public class WeatherForecast : IEntity
     {

@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using EmeraldChameleonChat.DAL.DbContexts;
-using EmeraldChameleonChat.Model.Entity;
-using EmeraldChameleonChat.DAL.Repository.RepositoryInterfaces;
+using EmeraldChameleonChat.Services.DAL.DbContexts;
+using EmeraldChameleonChat.Services.Model.Entity;
+using EmeraldChameleonChat.Services.DAL.Repository.RepositoryInterfaces;
 
-namespace EmeraldChameleonChat.DAL.Repository
+namespace EmeraldChameleonChat.Services.DAL.Repository
 {
     public class WeatherForecastRepository : BaseRepository<WeatherForecast>, IWeatherForecastRepository //this class EXTENDS our base repository & implements the repositories interface
     {
