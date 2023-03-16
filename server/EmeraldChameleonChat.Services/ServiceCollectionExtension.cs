@@ -16,7 +16,13 @@ namespace EmeraldChameleonChat.Services
     {
         public static IServiceCollection AddProjectServicesCollections(this IServiceCollection services, IConfiguration Configuration)
         {
-            services.AddDbContext<EmeraldChameleonChatContext>(dbContextOptions => dbContextOptions.UseSqlite("Data Source=WeatherInfo.db"));// adds the dbcontext with a scoped lifetime
+            var connectionString = Configuration.GetConnectionString("HackWeekly");
+
+            services.AddDbContext<EmeraldChameleonChatContext>(options => options.UseMySql(
+                (connectionString), ServerVersion.AutoDetect(connectionString)
+                ));
+            //services.AddDbContext<EmeraldChameleonChatContext>(dbContextOptions => dbContextOptions.UseSqlite("Data Source=WeatherInfo.db"));// adds the dbcontext with a scoped lifetime
+            
             services.AddScoped<IWeatherForecastRepository, WeatherForecastRepository>();
 
 
