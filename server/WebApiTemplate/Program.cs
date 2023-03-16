@@ -1,11 +1,7 @@
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging.Configuration;
+using EmeraldChameleonChat.Services.Model.Entity;
+using EmeraldChameleonChat.Services;
 using Serilog;
-using EmeraldChameleonChat.DAL.DbContexts;
-using EmeraldChameleonChat.DAL.Repository;
-using EmeraldChameleonChat.DAL.Repository.RepositoryInterfaces;
-using EmeraldChameleonChat.Model.Entity;
-using EmeraldChameleonChat.Hubs;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Debug()
@@ -30,11 +26,13 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddProjectServicesCollections(builder.Configuration);
 builder.Services.AddRazorPages();
 
-builder.Services.AddDbContext<EmeraldChameleonChatContext>(
-    dbContextOptions => dbContextOptions.UseSqlite("Data Source=WeatherInfo.db"));// adds the dbcontext with a scoped lifetime
-builder.Services.AddScoped<IWeatherForecastRepository, WeatherForecastRepository>();
+builder.Services.AddSignalR();
+
+builder.Services.AddCors();
 
 builder.Services.AddSignalR();
 

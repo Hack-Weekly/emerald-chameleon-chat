@@ -1,4 +1,4 @@
-﻿namespace EmeraldChameleonChat.Model.Entity
+﻿namespace EmeraldChameleonChat.Services.Model.Entity
 {
     public interface IEntity<T>
     {

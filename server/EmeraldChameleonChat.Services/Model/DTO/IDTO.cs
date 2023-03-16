@@ -1,4 +1,4 @@
-﻿namespace EmeraldChameleonChat.Model.DTO
+﻿namespace EmeraldChameleonChat.Services.Model.DTO
 {
     public interface IDTO
     {

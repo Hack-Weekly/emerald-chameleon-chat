@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using System.Runtime.InteropServices;
-using EmeraldChameleonChat.Model.DTO;
-using EmeraldChameleonChat.Model.Entity;
+using EmeraldChameleonChat.Services.Model.DTO;
+using EmeraldChameleonChat.Services.Model.Entity;
 
-namespace EmeraldChameleonChat.AutoMapperProfiles
+namespace EmeraldChameleonChat.Services.AutoMapperProfiles
 {
     public class EntityToDTOProfile : Profile
     {

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace EmeraldChameleonChat.Model.DTO
+namespace EmeraldChameleonChat.Services.Model.DTO
 {
     public class WeatherForecastGetDto : IDTO
     {

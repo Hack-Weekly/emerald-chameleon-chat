@@ -1,8 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using EmeraldChameleonChat.DAL.Repository.RepositoryInterfaces;
-using EmeraldChameleonChat.Model.Entity;
+using EmeraldChameleonChat.Services.DAL.Repository.RepositoryInterfaces;
+using EmeraldChameleonChat.Services.Model.Entity;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 
-namespace EmeraldChameleonChat.DAL.Repository
+namespace EmeraldChameleonChat.Services.DAL.Repository
 {
     public class BaseRepository<TEntity> : IRepository<TEntity>
         where TEntity : class, IEntity
@@ -19,6 +21,16 @@ namespace EmeraldChameleonChat.DAL.Repository
             GenerateIdIfRequired(entity);
             await _context.Set<TEntity>().AddAsync(entity, token);
             await _context.SaveChangesAsync(token);
+            return entity;
+        }
+        public async Task<TEntity> UpdateAsync(TEntity entity, CancellationToken token, bool save = true)
+        {
+            var entry = _context.Attach(entity);
+            entry.State = EntityState.Modified;
+            if (save)
+            {
+                await _context.SaveChangesAsync();
+            }
             return entity;
         }
 

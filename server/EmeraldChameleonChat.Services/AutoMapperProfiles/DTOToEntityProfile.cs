@@ -1,12 +1,12 @@
-﻿using EmeraldChameleonChat.Model.DTO;
-using EmeraldChameleonChat.Model.Entity;
+﻿using EmeraldChameleonChat.Services.Model.DTO;
+using EmeraldChameleonChat.Services.Model.Entity;
 using AutoMapper;
 
-namespace EmeraldChameleonChat.AutoMapperProfiles
+namespace EmeraldChameleonChat.Services.AutoMapperProfiles
 {
     public class DTOToEntityProfile : Profile
     {
-        public DTOToEntityProfile() 
+        public DTOToEntityProfile()
         {
             //GET mappings
             CreateMap<WeatherForecastGetDto, WeatherForecast>();
