@@ -22,16 +22,15 @@ export default function Index() {
         <p className={styles.loginLink}>{'Log In >'}</p>
       </div>
       <div className={styles.footer}>
-        <div className={styles.footerTextandLogo}>
+        <div>
           <Image
             priority
-            src="/images/chameleon.svg"
+            src="/images/logo.png"
             alt="Chameleon Logo"
             width={20}
             height={20}
-            className={styles.footerIcon}
           />
-          <p className={styles.footerText}>Emerald Chat</p>
+          <p>Emerald Chat</p>
         </div>
         <p>2023</p>
       </div>

@@ -18,7 +18,7 @@ export default async function RootLayout({ children }: Props) {
       </head>
       <body style={{ margin: 0 }}>
         <main>
-          <div style={{ backgroundColor: 'rgba(30,20,10,0.4)' }}>{children}</div>
+          <div>{children}</div>
         </main>
       </body>
     </html>
