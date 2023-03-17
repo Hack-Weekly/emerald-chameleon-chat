@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EmeraldChameleonChat.Services.Migrations
 {
     [DbContext(typeof(EmeraldChameleonChatContext))]
-    [Migration("20230316194305_InitialMySQL")]
-    partial class InitialMySQL
+    [Migration("20230317020718_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
