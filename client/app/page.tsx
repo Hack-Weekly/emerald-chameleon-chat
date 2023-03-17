@@ -46,6 +46,6 @@ export default function Index() {
         </div>
         <p>2023</p>
       </div>
-    </div>
+      </div>
   )
 }
