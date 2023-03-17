@@ -23,15 +23,6 @@ namespace EmeraldChameleonChat.Services.Shared
             return builder.HtmlBody;
         }
 
-
-
-        public static string CreateRandomPassword(string password)
-        {
-            if (string.IsNullOrWhiteSpace(password))
-                password = GenerateRandomPassword();
-
-            return Convert.ToBase64String(HashPassword(password, RandomNumberGenerator.Create()));
-        }
         public static string GenerateRandomPassword(int length = 8)
         {
             // Create a string of characters, numbers, special characters that allowed in the password  
@@ -155,5 +146,12 @@ namespace EmeraldChameleonChat.Services.Shared
             buffer[offset + 3] = (byte)(value >> 0);
         }
 
+        //public static string CreateRandomPassword(string password)
+        //{
+        //    if (string.IsNullOrWhiteSpace(password))
+        //        password = GenerateRandomPassword();
+
+        //    return Convert.ToBase64String(HashPassword(password, RandomNumberGenerator.Create()));
+        //}
     }
 }
