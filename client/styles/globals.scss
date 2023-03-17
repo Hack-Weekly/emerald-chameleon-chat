@@ -1,12 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@use "variables.module.scss" as variables;
 
-:root {
-  --red: rgba(255,0,0,1)
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  font-family: 'Lobster Two', cursive;
+  font-family: variables.$base-font-family;
   font-weight: 400;
-  font-size: 16px;
-  color: var(--red);
+  font-size: variables.$base-font-size;
+  background-color: variables.$neutral-100;
+  color: variables.$primary-dark;
 }
