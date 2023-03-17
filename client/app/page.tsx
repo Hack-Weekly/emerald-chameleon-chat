@@ -17,9 +17,9 @@ export default function Index() {
         <p>{'Chat with friends'}</p>
         <p>{'All around the world!'}</p>
       </div>
-      <div className={styles.sliderWrapper}>
-        <div className={styles.slider}>Start</div>
-        <p className={styles.loginLink}>{'Log In >'}</p>
+      <div className={styles.loginContainer}>
+        <div>Start</div>
+        <p>{'Log In >'}</p>
       </div>
       <div className={styles.footer}>
         <div>

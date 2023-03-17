@@ -22,8 +22,9 @@
     gap: .5rem;
 }
 
-.sliderWrapper {
+.loginContainer {
     width: 80%;
+    margin-top: 2rem;
 
     div {
         width: 100%;
@@ -41,6 +42,7 @@
     }
 
     p {
+        margin-top: 1rem;
         color: variables.$secondary;
         text-align: center;
     }
@@ -50,14 +52,17 @@
     margin-top: auto;
     width: 100%;
     text-align: center;
+    padding: 1rem;
+    font-size: variables.$font-size-sm;
 
     div {
         display: flex;
         justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
 
         p {
             color: variables.$primary-light;
-            font-size: variables.$font-size-sm;
         }
     }
     p {
