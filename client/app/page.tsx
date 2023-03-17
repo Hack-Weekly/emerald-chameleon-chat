@@ -33,19 +33,6 @@ export default function Index() {
           <p>Create Account</p>
         </div>
       </div>
-      <div className={styles.footer}>
-        <div>
-          <Image
-            priority
-            src="/images/logo.png"
-            alt="Chameleon Logo"
-            width={20}
-            height={20}
-          />
-          <p>Emerald Chat</p>
-        </div>
-        <p>2023</p>
-      </div>
-      </div>
+    </div>
   )
 }
