@@ -22,8 +22,9 @@ namespace EmeraldChameleonChat.Services
                 (connectionString), ServerVersion.AutoDetect(connectionString)
                 ));
             //services.AddDbContext<EmeraldChameleonChatContext>(dbContextOptions => dbContextOptions.UseSqlite("Data Source=WeatherInfo.db"));// adds the dbcontext with a scoped lifetime
-            
+            services.AddScoped<IChatMessageRepository, ChatMessageRepository>();
             services.AddScoped<IWeatherForecastRepository, WeatherForecastRepository>();
+            
 
 
             return services;
