@@ -7,10 +7,13 @@ using System.ComponentModel.DataAnnotations;
 
 namespace EmeraldChameleonChat.Services.Model.DTO 
 {
-    internal class ChatMessageDTO : IDTO
+    public class ChatMessageDTO : IDTO
     {
-        public Guid Id { get; set; }
-        public string UserName { get; set; } = String.Empty;
-        public string Message { get; set; } = String.Empty;
+        public Guid Id { get; set; } = Guid.NewGuid();
+        public string ChatId { get; set; } = string.Empty;
+        public string UserName { get; set; } = string.Empty;
+        public string Message { get; set; } = string.Empty;
+        public DateTime CreatedDate { get; set; } = DateTime.Now;
+       
     }
 }
