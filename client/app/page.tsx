@@ -8,8 +8,8 @@ export default function Index() {
         priority
         src="/images/chameleon.svg"
         alt="Chameleon Logo"
-        width={150}
-        height={150}
+        width={120}
+        height={120}
         className={styles.logo}
       />
       <div className={styles.introText}>
@@ -18,7 +18,16 @@ export default function Index() {
         <p>{'All around the world!'}</p>
       </div>
       <div className={styles.loginContainer}>
-        <div>Start</div>
+        <div>
+          <span>Start</span>
+          <Image
+            priority
+            src="/images/right-arrow.svg"
+            alt="arrow"
+            width={50}
+            height={50}
+          />
+        </div>
         <p>{'Log In >'}</p>
       </div>
       <div className={styles.footer}>
