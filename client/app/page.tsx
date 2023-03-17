@@ -18,7 +18,7 @@ export default function Index() {
         <p>{'All around the world!'}</p>
       </div>
       <div className={styles.loginContainer}>
-        <div>
+        <div className={styles.slider}>
           <span>Start</span>
           <Image
             priority
@@ -28,7 +28,10 @@ export default function Index() {
             height={50}
           />
         </div>
-        <p>{'Log In >'}</p>
+        <div className={styles.links}>
+          <p>Log In</p>
+          <p>Create Account</p>
+        </div>
       </div>
       <div className={styles.footer}>
         <div>
