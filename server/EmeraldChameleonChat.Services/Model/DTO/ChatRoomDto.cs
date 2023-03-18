@@ -1,30 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
 
-namespace EmeraldChameleonChat.Services.Model.DTO 
+namespace EmeraldChameleonChat.Services.Model.DTO
 {
-    public class ChatRoomMessageDto : IDTO
+    public class ChatRoomDto : IDTO
     {
         public class Request
         {
             public string Name { get; set; }
-            public string UserId { get; set; }
-            public string MessageBody { get; set; }
-            public DateTime CreatedDate { get; set; }
         }
 
         public class Response
         {
             public Guid Id { get; set; }
             public string Name { get; set; }
-            public string UserId { get; set; }
-            public string MessageBody { get; set; }
+            public string Description { get; set; }
             public DateTime CreatedDate { get; set; }
+            public DateTime LastConnection { get; set; }
+            public Guid CreatorId { get; set; }
+            public bool isActive { get; set; }
         }
-        
     }
 }

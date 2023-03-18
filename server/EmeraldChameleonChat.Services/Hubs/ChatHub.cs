@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using AutoMapper;
 using System.Text.RegularExpressions;
 using EmeraldChameleonChat.Services.Migrations;
+using Microsoft.Extensions.Logging;
 
 namespace EmeraldChameleonChat.Hubs
 {
