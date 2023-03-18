@@ -4,24 +4,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 6rem;
-  
-    .logo {
-        margin-top: 3rem;
-    }
-
-    .introText {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        color: v.$neutral-700;
-        font-size: v.$font-size-lg;
-        gap: .5rem;
-    }
+    gap: 5rem;
+    margin-top: 3rem;
 
     .loginContainer {
         width: 80%;
-        margin-top: 2rem;
+        margin-top: 1.5rem;
     
         .slider {
             width: 100%;

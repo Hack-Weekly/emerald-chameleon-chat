@@ -1,22 +1,13 @@
+import ChameleonGraphic from '@components/ChameleonGraphic'
+import IntroText from '@components/IntroText'
 import styles from '@styles/App.module.scss'
 import Image from 'next/image'
 
 export default function Index() {
   return (
     <div className={styles.homeLayout}>
-      <Image
-        priority
-        src="/images/chameleon.svg"
-        alt="Chameleon Logo"
-        width={120}
-        height={120}
-        className={styles.logo}
-      />
-      <div className={styles.introText}>
-        <p>{'Hi there!'}</p>
-        <p>{'Chat with friends'}</p>
-        <p>{'All around the world!'}</p>
-      </div>
+      <ChameleonGraphic />
+      <IntroText />
       <div className={styles.loginContainer}>
         <div className={styles.slider}>
           <span>Start</span>
