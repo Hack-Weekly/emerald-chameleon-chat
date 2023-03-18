@@ -19,7 +19,7 @@ namespace EmeraldChameleonChat.Services.Migrations
                 .HasAnnotation("ProductVersion", "7.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("EmeraldChameleonChat.Services.Model.Entity.ChatRoomMessage", b =>
+            modelBuilder.Entity("EmeraldChameleonChat.Services.Model.Entity.ChatRoom", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -28,19 +28,47 @@ namespace EmeraldChameleonChat.Services.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<string>("MessageBody")
+                    b.Property<Guid>("CreatorId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(250)
-                        .HasColumnType("varchar(250)");
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("LastConnection")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<bool>("isActive")
+                        .HasColumnType("tinyint(1)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Chatroom");
+                });
+
+            modelBuilder.Entity("EmeraldChameleonChat.Services.Model.Entity.ChatRoomMessage", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("ChatRoomId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("MessageBody")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasMaxLength(250)
-                        .HasColumnType("varchar(250)");
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 

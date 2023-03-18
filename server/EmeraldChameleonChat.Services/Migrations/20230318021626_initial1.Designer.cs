@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EmeraldChameleonChat.Services.Migrations
 {
     [DbContext(typeof(EmeraldChameleonChatContext))]
-    [Migration("20230317172821_addChatRoom")]
-    partial class addChatRoom
+    [Migration("20230318021626_initial1")]
+    partial class initial1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -22,32 +22,60 @@ namespace EmeraldChameleonChat.Services.Migrations
                 .HasAnnotation("ProductVersion", "7.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("EmeraldChameleonChat.Services.Model.Entity.ChatMessage", b =>
+            modelBuilder.Entity("EmeraldChameleonChat.Services.Model.Entity.ChatRoom", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
-                    b.Property<string>("ChatId")
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<Guid>("CreatorId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("longtext");
+
+                    b.Property<DateTime>("LastConnection")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<bool>("isActive")
+                        .HasColumnType("tinyint(1)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Chatroom");
+                });
+
+            modelBuilder.Entity("EmeraldChameleonChat.Services.Model.Entity.ChatRoomMessage", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("ChatRoomId")
+                        .HasColumnType("char(36)");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<string>("Message")
+                    b.Property<string>("MessageBody")
                         .IsRequired()
-                        .HasMaxLength(250)
-                        .HasColumnType("varchar(250)");
+                        .HasColumnType("longtext");
 
-                    b.Property<string>("UserName")
+                    b.Property<string>("UserId")
                         .IsRequired()
-                        .HasMaxLength(250)
-                        .HasColumnType("varchar(250)");
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
-                    b.ToTable("ChatMessage");
+                    b.ToTable("ChatRoomMessage");
                 });
 
             modelBuilder.Entity("EmeraldChameleonChat.Services.Model.Entity.WeatherForecast", b =>

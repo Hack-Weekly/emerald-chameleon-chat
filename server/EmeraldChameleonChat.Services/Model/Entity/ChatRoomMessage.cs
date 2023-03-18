@@ -15,23 +15,17 @@ namespace EmeraldChameleonChat.Services.Model.Entity
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; } = Guid.NewGuid();
-
-        public string Name { get; set; }
-
-        [Required(ErrorMessage = "User Required.")]
-        [MaxLength(250)]
+        [ForeignKey(nameof(ChatRoom.Id))]
+        public virtual Guid ChatRoomId { get; set; }
         public string UserId { get; set; }
-
-        [Required(ErrorMessage = "Message cannot be blank.")]
-        [MaxLength(250)]
         public string MessageBody { get; set; }
 
         public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
 
-        public ChatRoomMessage(Guid id, string chatName, string userId, string messageBody, DateTime dateTime) 
+        public ChatRoomMessage(Guid id, Guid chatRoomId, string userId, string messageBody, DateTime dateTime) 
         {
             Id = id;
-            Name = chatName;
+            ChatRoomId = ChatRoomId;
             UserId = userId;
             MessageBody = messageBody;
             CreatedDate = dateTime;

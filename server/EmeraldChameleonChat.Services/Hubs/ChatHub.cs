@@ -8,7 +8,6 @@ using EmeraldChameleonChat.Services.DAL.Repository;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using AutoMapper;
 using System.Text.RegularExpressions;
-using EmeraldChameleonChat.Services.Migrations;
 using Microsoft.Extensions.Logging;
 
 namespace EmeraldChameleonChat.Hubs
@@ -34,16 +33,16 @@ namespace EmeraldChameleonChat.Hubs
         //    await this.Clients.Group(chatRoomName).BroadcastMessageAsync(messages);
         //}
 
-        public async Task SendMessage(string user, string message, string room)
+        public async Task SendMessage(string user, string message)
         {
-            await JoinRoom(room).ConfigureAwait(false);
-            await Clients.Group(room).SendAsync("ReceiveMessage", user, " joined the chatroom " + room).ConfigureAwait(true);
+            //await JoinRoom(room).ConfigureAwait(false);
+            //await Clients.Group(room).SendAsync("ReceiveMessage", user, " joined the chatroom " + room).ConfigureAwait(true);
 
             CancellationToken token = new();
 
-            var result = new ChatRoomMessage(default,room,user,message,DateTime.UtcNow);
+            var result = new ChatRoomMessage(default,default,user,message,DateTime.UtcNow);
 
-            await Clients.Group(room).SendAsync("ReceiveMessage", user, message).ConfigureAwait(true);
+            await Clients.All.SendAsync("ReceiveMessage", user, message).ConfigureAwait(true);
             await _context.CreateAsync(result, token, true);
         }
 
