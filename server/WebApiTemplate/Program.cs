@@ -35,7 +35,10 @@ builder.Services.AddSignalR();
 
 builder.Services.AddCors();
 
-builder.Services.AddSignalR();
+builder.Services.AddSignalR(options =>
+{
+    options.EnableDetailedErrors = true;
+});
 
 builder.Services.AddCors();
 
@@ -51,7 +54,6 @@ app.UseCors(x => x
             .AllowAnyMethod()
             .AllowAnyHeader()
             .AllowCredentials()
-            //.WithOrigins("https://localhost:44351")); // Allow only this origin can also have multiple origins seperated with comma
             .SetIsOriginAllowed(origin => true));// Allow any origin 
 
 app.UseRouting();
