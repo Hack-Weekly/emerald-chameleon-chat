@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EmeraldChameleonChat.Services.DAL.Repository.RepositoryInterfaces
 {
-    public interface IChatMessageRepository : IRepository<Model.Entity.ChatMessage>
+    public interface IChatRoomMessageRepository : IRepository<Model.Entity.ChatRoomMessage>
     {
 
     }

@@ -7,17 +7,17 @@ using Microsoft.AspNetCore.SignalR;
 using EmeraldChameleonChat.Services.DAL.Repository;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using AutoMapper;
-using EmeraldChameleonChat.Services.Migrations;
 using System.Text.RegularExpressions;
+using EmeraldChameleonChat.Services.Migrations;
 
 namespace EmeraldChameleonChat.Hubs
 {
     public class ChatHub : Hub
     {
         private readonly ILogger<ChatHub> _logger;
-        private readonly IChatMessageRepository _context;
+        private readonly IChatRoomMessageRepository _context;
         private readonly IMapper _mapper;
-        public ChatHub(ILogger<ChatHub> logger, IChatMessageRepository context, IMapper mapper)
+        public ChatHub(ILogger<ChatHub> logger, IChatRoomMessageRepository context, IMapper mapper)
         {
             _logger = logger;
             _context = context;
@@ -36,14 +36,14 @@ namespace EmeraldChameleonChat.Hubs
         public async Task SendMessage(string user, string message, string room)
         {
             await JoinRoom(room).ConfigureAwait(false);
-            await Clients.Group(room).SendAsync("ReceiveMessage", user, " joined to " + room).ConfigureAwait(true);
+            await Clients.Group(room).SendAsync("ReceiveMessage", user, " joined the chatroom " + room).ConfigureAwait(true);
 
             CancellationToken token = new();
 
-            var newMessage = new Services.Model.Entity.ChatMessage(id: default, chatId: room, userName: user, message: message, dateTime: default); 
+            var result = new ChatRoomMessage(default,room,user,message,DateTime.UtcNow);
 
             await Clients.Group(room).SendAsync("ReceiveMessage", user, message).ConfigureAwait(true);
-            await _context.CreateAsync(  newMessage, token, true);
+            await _context.CreateAsync(result, token, true);
         }
 
         public Task JoinRoom(string roomName)

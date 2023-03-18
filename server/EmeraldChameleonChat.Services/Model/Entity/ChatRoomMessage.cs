@@ -5,34 +5,40 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.CompilerServices;
+using System.Runtime.ExceptionServices;
 
 namespace EmeraldChameleonChat.Services.Model.Entity
 {
-    public class ChatMessage : IEntity
+    public class ChatRoomMessage : IEntity
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; } = Guid.NewGuid();
 
-        public string ChatId { get; set; }
+        public string Name { get; set; }
 
         [Required(ErrorMessage = "User Required.")]
         [MaxLength(250)]
-        public string UserName { get; set; }
+        public string UserId { get; set; }
 
         [Required(ErrorMessage = "Message cannot be blank.")]
         [MaxLength(250)]
-        public string Message { get; set; }
+        public string MessageBody { get; set; }
 
-        public DateTime CreatedDate { get; set; } = DateTime.Now;
+        public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
 
-        public ChatMessage(Guid id, string chatId, string userName, string message, DateTime dateTime) 
+        public ChatRoomMessage(Guid id, string chatName, string userId, string messageBody, DateTime dateTime) 
         {
             Id = id;
-            ChatId = chatId;
-            UserName = userName;
-            Message = message;
+            Name = chatName;
+            UserId = userId;
+            MessageBody = messageBody;
             CreatedDate = dateTime;
+        }
+
+        public ChatRoomMessage()
+        {
         }
     }
 }

@@ -31,7 +31,7 @@ namespace EmeraldChameleonChat.Controllers
         public async Task<ActionResult<IEnumerable<WeatherForecastGetDto>>> Get(CancellationToken token)
         {
             _logger.LogDebug("Example Debug Log Message");
-            var weatherForecastInfoFromDatabaseViaRepository = (await _weatherForecastRepository.GetAsync(token));
+            IEnumerable<WeatherForecast>? weatherForecastInfoFromDatabaseViaRepository = (await _weatherForecastRepository.GetAsync(token));
             var result = weatherForecastInfoFromDatabaseViaRepository.MapToDTO<IEnumerable<WeatherForecastGetDto>>();
             return Ok(result);
         }

@@ -10,11 +10,11 @@ using EmeraldChameleonChat.Services.DAL.Repository.RepositoryInterfaces;
 
 namespace EmeraldChameleonChat.Services.DAL.Repository
 {
-    public class ChatMessageRepository : BaseRepository<ChatMessage>, IChatMessageRepository
+    public class ChatRoomMessageRepository : BaseRepository<ChatRoomMessage>, IChatRoomMessageRepository
     {
         private readonly EmeraldChameleonChatContext _context;
 
-        public ChatMessageRepository(EmeraldChameleonChatContext context) : base(context)
+        public ChatRoomMessageRepository(EmeraldChameleonChatContext context) : base(context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }

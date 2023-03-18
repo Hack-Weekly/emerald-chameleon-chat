@@ -9,7 +9,7 @@ namespace EmeraldChameleonChat.Services.AutoMapperProfiles
     {
         public EntityToDTOProfile()
         {
-            CreateMap<ChatMessage, ChatMessageDTO>();
+            CreateMap<ChatRoomMessage, ChatRoomMessageDTO>();
             //GET mappings
             CreateMap<WeatherForecast, WeatherForecastGetDto>();
 
