@@ -1,0 +1,39 @@
+@use "variables.module.scss" as v;
+
+.startContainer {
+    width: 80%;
+    margin-top: 1.5rem;
+
+    .slider {
+        width: 100%;
+        max-width: 350px;
+        height: 3rem;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: v.$font-size-xl;
+        padding: 2rem;
+        padding-right: 0;
+        color: v.$neutral-700;
+        background-color: v.$neutral-100;
+        border: 1px solid v.$neutral-700;
+        box-shadow: 5px 5px 10px v.$neutral-300;
+        border-radius: 35px;
+
+        img {
+            background-color: v.$primary-light;
+            border-radius: 50%;
+        }
+    }
+
+    .links {
+        color: v.$secondary;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-top: 1.2rem;
+        font-size: v.$font-size-sm * 1.2;
+    }
+}
