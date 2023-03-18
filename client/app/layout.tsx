@@ -16,9 +16,9 @@ export default async function RootLayout({ children }: Props) {
         <meta name="description" content="Go-Events" />
         <link rel="icon" type="image/x-icon" href="/icons/favicon.ico" />
       </head>
-      <body style={{ margin: 0 }}>
+      <body style={{ margin: 0, backgroundColor: '#f1f1f1' }}>
         <main>
-          <div style={{ backgroundColor: 'rgba(30,20,10,0.4)' }}>{children}</div>
+          <div>{children}</div>
         </main>
       </body>
     </html>
