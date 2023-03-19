@@ -1,7 +1,7 @@
 'use client'
 import { useState } from 'react'
 // import { useRouter } from 'next/router'
-import styles from '@styles/App.module.scss'
+import styles from './Login.module.scss'
 
 type LoginValues = { 
   user: string,
