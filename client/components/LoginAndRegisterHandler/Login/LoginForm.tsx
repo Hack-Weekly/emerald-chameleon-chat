@@ -3,8 +3,8 @@ import { useState } from 'react'
 // import { useRouter } from 'next/router'
 import styles from './LoginForm.module.scss'
 
-type LoginValues = { 
-  user: string,
+type LoginValues = {
+  user: string
   password: string
 }
 
@@ -19,7 +19,7 @@ export default function LoginForm() {
     const { name, value } = e.target
     setFormValues({
       ...formValues,
-      [name]: value
+      [name]: value,
     })
   }
 
@@ -30,7 +30,7 @@ export default function LoginForm() {
     try {
       const res = await fetch('api/login', {
         method: 'POST',
-        body: JSON.stringify(formValues)
+        body: JSON.stringify(formValues),
         // headers: {
         //   "Content-Type": "application/json"
         // }
@@ -52,15 +52,15 @@ export default function LoginForm() {
     <form onSubmit={handleSubmit} className={styles.formWrapper}>
       <h2 className={styles.formTitle}>Login</h2>
       <label htmlFor="user">User/ID</label>
-      <input 
-        id="user" 
+      <input
+        id="user"
         type="text"
         name="user"
         value={formValues.user}
         onChange={handleInputChange}
       />
       <label htmlFor="password">Password</label>
-      <input 
+      <input
         id="password"
         type="password"
         name="password"
@@ -70,7 +70,9 @@ export default function LoginForm() {
       <div className={styles.buttonContainer}>
         {/* buttons not functional yet */}
         <button className={styles.cancelButton}>Cancel</button>
-        <button className={styles.loginButton} type="submit">Login</button>
+        <button className={styles.loginButton} type="submit">
+          Login
+        </button>
       </div>
     </form>
   )
