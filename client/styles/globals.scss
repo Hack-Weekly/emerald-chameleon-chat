@@ -10,6 +10,31 @@ body {
   font-family: variables.$base-font-family;
   font-weight: 400;
   font-size: variables.$base-font-size;
-  background-color: variables.$neutral-100;
+  background-color: variables.$neutral-200;
   color: variables.$primary-dark;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+footer {
+  margin-top: auto;
+  width: 100%;
+  text-align: center;
+  padding: 1rem;
+  font-size: variables.$font-size-sm;
+
+  div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+
+      p {
+          color: variables.$primary-light;
+      }
+  }
+  p {
+      color: variables.$neutral-300;
+  }
 }
