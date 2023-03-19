@@ -41,7 +41,7 @@ namespace EmeraldChameleonChat.Services.Services.Users
         {
             return await _registeredUserRepository.UserExists(username, email);
         }
-        public async Task<User> FindUser(LoginModel loginModel)
+        public async Task<User> FindUser(LoginDTO loginModel)
         {
             if (loginModel.Username != null)
                 return await _registeredUserRepository.GetUserByUserName(loginModel.Username);
@@ -50,14 +50,14 @@ namespace EmeraldChameleonChat.Services.Services.Users
 
             return null;
         }
-        public async Task<LoginResponseModel> LoginUser(User registeredUser, string providedPassword, CancellationToken cancellationToken)
+        public async Task<LoginResponseDTO> LoginUser(User registeredUser, string providedPassword, CancellationToken cancellationToken)
         {
             if (!Util.VerifyPassword(registeredUser.Password, providedPassword))
                 return null;
 
             return await _authenticationService.GenerateJWToken(registeredUser, cancellationToken, true);
         }
-        public async Task<LoginResponseModel> RegisterUser(RegisterModel registerModel, CancellationToken cancellationToken)
+        public async Task<LoginResponseDTO> RegisterUser(RegisterDTO registerModel, CancellationToken cancellationToken)
         {
             try
             {

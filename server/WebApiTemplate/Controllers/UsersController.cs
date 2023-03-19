@@ -1,10 +1,10 @@
-﻿using EmeraldChameleonChat.Services.Model.DTO;
+﻿using System.Threading;
+using EmeraldChameleonChat.Services.Model.DTO;
 using EmeraldChameleonChat.Services.Model.DTO.Users;
 using EmeraldChameleonChat.Services.Services.Users;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading;
 
 namespace EmeraldChameleonChat.Controllers
 {
@@ -24,7 +24,7 @@ namespace EmeraldChameleonChat.Controllers
 
 
         [HttpPost(Name = "Login")]
-        public async Task<ActionResult<LoginResponseModel>> Login([FromForm] LoginModel loginDTO, CancellationToken cancellationToken)
+        public async Task<ActionResult<LoginResponseDTO>> Login([FromForm] LoginDTO loginDTO, CancellationToken cancellationToken)
         {
             if (loginDTO == null) return BadRequest("Please fill the required data");
             if (loginDTO.Password == null) return BadRequest("Password is Required");
@@ -40,7 +40,7 @@ namespace EmeraldChameleonChat.Controllers
         }
 
         [HttpPost(Name = "Register")]
-        public async Task<ActionResult<LoginResponseModel>> Register([FromForm] RegisterModel registeredUser, CancellationToken cancellationToken)
+        public async Task<ActionResult<LoginResponseDTO>> Register([FromForm] RegisterDTO registeredUser, CancellationToken cancellationToken)
         {
             if (registeredUser == null) return BadRequest("Please fill the required data");
             if (registeredUser.Username == null) return BadRequest("Username is Required");
@@ -55,15 +55,15 @@ namespace EmeraldChameleonChat.Controllers
         [HttpPost(Name = "SendConfirmation")]
         public async Task<IActionResult> SendConfirmation([FromForm] string email)
         {
-            var user = await _userService.FindUser(new LoginModel() { Email = email});
+            var user = await _userService.FindUser(new LoginDTO() { Email = email });
             if (user == null) return BadRequest("User with this email does not exist");
 
             await _userService.SendConfirmation(user);
 
             return Ok();
         }
-        [HttpGet(Name = "Confirmation")]
-        public async Task<IActionResult> Confirmation([FromQuery] string confirmationCode, [FromQuery] string userName, CancellationToken cancellationToken)
+        [HttpGet(Name = "EmailConfirmation")]
+        public async Task<IActionResult> EmailConfirmation([FromQuery] string confirmationCode, [FromQuery] string userName, CancellationToken cancellationToken)
         {
             var isConfirmed = await _userService.ConfirmUser(userName, confirmationCode, cancellationToken);
             if (isConfirmed == false) return BadRequest();
@@ -71,9 +71,9 @@ namespace EmeraldChameleonChat.Controllers
             return Ok("User Confirmed");
         }
 
-        [HttpGet(Name = "Refresh")]
+        [HttpGet(Name = "RefreshToken")]
         [Authorize]
-        public async Task<ActionResult<LoginResponseModel>> Refresh([FromQuery(Name = "refresh_token")] string refreshToken, CancellationToken cancellationToken)
+        public async Task<ActionResult<LoginResponseDTO>> RefreshToken([FromQuery(Name = "refresh_token")] string refreshToken, CancellationToken cancellationToken)
         {
             var accessToken = HttpContext.Request.Headers["Authorization"].ToString().Replace("Bearer ", string.Empty) ?? "";
             if (string.IsNullOrWhiteSpace(accessToken)) { return Unauthorized(); }

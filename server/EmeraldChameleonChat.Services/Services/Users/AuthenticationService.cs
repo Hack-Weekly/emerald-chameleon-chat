@@ -32,9 +32,9 @@ namespace EmeraldChameleonChat.Services.Services.Users
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public async Task<LoginResponseModel> GenerateJWToken(User registeredUser, CancellationToken cancellationToken, bool refreshExpired = false)
+        public async Task<LoginResponseDTO> GenerateJWToken(User registeredUser, CancellationToken cancellationToken, bool refreshExpired = false)
         {
-            LoginResponseModel loginResponseModel = new LoginResponseModel();
+            LoginResponseDTO loginResponseModel = new LoginResponseDTO();
             var claims = GenerateClaims(registeredUser);
             loginResponseModel.AccessToken = GenerateAccessToken(claims);
 
@@ -94,7 +94,7 @@ namespace EmeraldChameleonChat.Services.Services.Users
 
             return returnedToken;
         }
-        public async Task<LoginResponseModel> ValidateRefreshToken(string accessToken, string refreshToken, CancellationToken cancellationToken)
+        public async Task<LoginResponseDTO> ValidateRefreshToken(string accessToken, string refreshToken, CancellationToken cancellationToken)
         {
             var claims = ValidateJWTToken(accessToken, Access);
             if (claims == null) return null;

@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+﻿using System.Security.Cryptography;
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.Hosting;
 using MimeKit;
-using System.Security.Cryptography;
 
 
 namespace EmeraldChameleonChat.Services.Shared
@@ -146,12 +146,5 @@ namespace EmeraldChameleonChat.Services.Shared
             buffer[offset + 3] = (byte)(value >> 0);
         }
 
-        //public static string CreateRandomPassword(string password)
-        //{
-        //    if (string.IsNullOrWhiteSpace(password))
-        //        password = GenerateRandomPassword();
-
-        //    return Convert.ToBase64String(HashPassword(password, RandomNumberGenerator.Create()));
-        //}
     }
 }

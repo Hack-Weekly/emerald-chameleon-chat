@@ -11,6 +11,7 @@ namespace EmeraldChameleonChat.Services.AutoMapperProfiles
             {
                 ex.AddProfile(new EntityToDTOProfile());
                 ex.AddProfile(new DTOToEntityProfile());
+                ex.AddProfile(new MapperProfiles());
             }));
 
         public static TDTO MapToDTO<TDTO>(this IEntity entity)

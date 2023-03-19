@@ -5,8 +5,8 @@ namespace EmeraldChameleonChat.Services.Services.Users
 {
     public interface IAuthenticationService
     {
-        Task<LoginResponseModel> GenerateJWToken(User registeredUser, CancellationToken cancellationToken, bool refreshExpired = false);
-        Task<LoginResponseModel> ValidateRefreshToken(string accessToken, string refreshToken, CancellationToken cancellationToken);
+        Task<LoginResponseDTO> GenerateJWToken(User registeredUser, CancellationToken cancellationToken, bool refreshExpired = false);
+        Task<LoginResponseDTO> ValidateRefreshToken(string accessToken, string refreshToken, CancellationToken cancellationToken);
 
     }
 }

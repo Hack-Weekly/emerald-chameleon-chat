@@ -1,5 +1,5 @@
-﻿using AutoMapper;
-using System.Runtime.CompilerServices;
+﻿using System.Runtime.CompilerServices;
+using AutoMapper;
 using EmeraldChameleonChat.Services.Model.DTO;
 using EmeraldChameleonChat.Services.Model.Entity;
 
@@ -12,6 +12,7 @@ namespace EmeraldChameleonChat.Services.AutoMapperProfiles
             {
                 ex.AddProfile(new EntityToDTOProfile());
                 ex.AddProfile(new DTOToEntityProfile());
+                ex.AddProfile(new MapperProfiles());
             }));
 
         public static TEntity MapToEntity<TEntity>(this IDTO dto)

@@ -19,7 +19,7 @@ namespace EmeraldChameleonChat.Services.AutoMapperProfiles
 
         private void UsersMapper()
         {
-            CreateMap<User, RegisterModel>().ReverseMap();
+            CreateMap<User, RegisterDTO>().ReverseMap();
         }
     }
 }

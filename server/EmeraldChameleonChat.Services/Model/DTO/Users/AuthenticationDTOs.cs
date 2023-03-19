@@ -1,9 +1,9 @@
-﻿using EmeraldChameleonChat.Services.Model.Entity.Users;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using EmeraldChameleonChat.Services.Model.Entity.Users;
 
 namespace EmeraldChameleonChat.Services.Model.DTO.Users
 {
-    public class RegisterModel
+    public class RegisterDTO
     {
         public string? Name { get; set; }
         [EmailAddress, Required] public string Email { get; set; } = string.Empty;
@@ -16,7 +16,7 @@ namespace EmeraldChameleonChat.Services.Model.DTO.Users
 
 
 
-    public class LoginModel
+    public class LoginDTO
     {
         public string? UserId { get; set; }
         public string? Email { get; set; }
@@ -24,28 +24,28 @@ namespace EmeraldChameleonChat.Services.Model.DTO.Users
         public string Password { get; set; } = String.Empty;
     }
 
-    public class LoginResponseModel
+    public class LoginResponseDTO
     {
         public string AccessToken { get; set; }
         public string RefreshToken { get; set; }
 
-        public LoginResponseModel()
+        public LoginResponseDTO()
         {
 
         }
-        public LoginResponseModel(string accessToken, string refreshToken)
+        public LoginResponseDTO(string accessToken, string refreshToken)
         {
             AccessToken = accessToken;
             RefreshToken = refreshToken;
         }
     }
-    public class TokenValidationResponse
+    public class TokenValidationResponseDTO
     {
         public int Id { get; set; }
 
         public User? User { get; set; }
 
-        public TokenValidationResponse(User user)
+        public TokenValidationResponseDTO(User user)
         {
             User = user;
         }
