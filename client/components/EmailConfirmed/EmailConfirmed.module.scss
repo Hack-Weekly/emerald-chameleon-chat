@@ -1,0 +1,55 @@
+@use "variables.module.scss" as v;
+
+.pageWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 3rem;
+    margin-top: 3rem;
+
+    .instructionsText {
+        margin: .7rem;
+    }
+}
+
+.formWrapper {
+    background-color: v.$neutral-100;
+    padding: 2rem;
+    border: 2px solid v.$neutral-700;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    label {
+        margin-bottom: 0.5rem;
+    }
+
+    input {
+        padding: 0.5rem;
+        border-radius: 5px;
+    }
+
+    .buttons {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 2rem;
+
+        button {
+            padding: 0.5rem 1rem;
+            font-size: v.$base-font-size;
+            border: none;
+        }
+
+        .cancelButton {
+            background-color: v.$neutral-300;
+        }
+
+        .submitButton {
+            background-color: v.$primary-dark;
+            color: v.$neutral-200;
+        }
+    }
+}
