@@ -4,10 +4,12 @@ using EmeraldChameleonChat.Services.Model.DTO;
 using EmeraldChameleonChat.Services.DAL.Repository;
 using EmeraldChameleonChat.Services.AutoMapperProfiles;
 using EmeraldChameleonChat.Services.Model.Entity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EmeraldChameleonChat.Controllers
 {
     [ApiController]
+    [Authorize]
     [Route("/api/WeatherForecast")]
     public class WeatherForecastController : ControllerBase
     {
@@ -27,13 +29,20 @@ namespace EmeraldChameleonChat.Controllers
             _weatherForecastRepository = weatherForecastRepository;
         }
 
+        //[HttpGet(Name = "GetWeatherForecast")]
+        //public async Task<ActionResult<IEnumerable<WeatherForecastGetDto>>> Get(CancellationToken token)
+        //{
+        //    _logger.LogDebug("Example Debug Log Message");
+        //    var weatherForecastInfoFromDatabaseViaRepository = (await _weatherForecastRepository.GetAsync(token));
+        //    var result = weatherForecastInfoFromDatabaseViaRepository.MapToDTO<IEnumerable<WeatherForecastGetDto>>();
+        //    return Ok(result);
+        //}
+
         [HttpGet(Name = "GetWeatherForecast")]
-        public async Task<ActionResult<IEnumerable<WeatherForecastGetDto>>> Get(CancellationToken token)
+        [Authorize]
+        public async Task<ActionResult<string>> Get()
         {
-            _logger.LogDebug("Example Debug Log Message");
-            var weatherForecastInfoFromDatabaseViaRepository = (await _weatherForecastRepository.GetAsync(token));
-            var result = weatherForecastInfoFromDatabaseViaRepository.MapToDTO<IEnumerable<WeatherForecastGetDto>>();
-            return Ok(result);
+            return Ok("Hello World");
         }
     }
 }
