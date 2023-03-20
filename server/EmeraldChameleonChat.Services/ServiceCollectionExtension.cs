@@ -21,63 +21,30 @@ namespace EmeraldChameleonChat.Services
         public static IServiceCollection AddProjectServicesCollections(this IServiceCollection services, IConfiguration Configuration)
         {
             var connectionString = Configuration.GetConnectionString("HackWeekly");
-
-            services.AddDbContext<EmeraldChameleonChatContext>(dbContextOptions => dbContextOptions.UseSqlite(Configuration["ConnectionStrings:SQLLite"]));// adds the dbcontext with a scoped lifetime
-
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
-            {
-                //options.RequireHttpsMetadata = false;
-                options.SaveToken = false;
-                options.TokenValidationParameters = new TokenValidationParameters()
-                {
-                    ValidateIssuer = false,
-                    ValidateAudience = false,
-                    ValidateLifetime = true,
-                    ValidateIssuerSigningKey = true,
-
-                    ValidIssuer = Configuration["Jwt:Issuer"],
-                    ValidAudience = Configuration["Jwt:Audience"],
-                    IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(Configuration["Jwt:Keys:Access"]))
-                };
-            });
-            services.AddDbContext<EmeraldChameleonChatContext>(dbContextOptions => dbContextOptions.UseSqlite(Configuration["ConnectionStrings:SQLLite"]));// adds the dbcontext with a scoped lifetime
-
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
-            {
-                //options.RequireHttpsMetadata = false;
-                options.SaveToken = false;
-                options.TokenValidationParameters = new TokenValidationParameters()
-                {
-                    ValidateIssuer = false,
-                    ValidateAudience = false,
-                    ValidateLifetime = true,
-                    ValidateIssuerSigningKey = true,
-
-                    ValidIssuer = Configuration["Jwt:Issuer"],
-                    ValidAudience = Configuration["Jwt:Audience"],
-                    IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(Configuration["Jwt:Keys:Access"]))
-                };
-            });
-
-
-            var connectionString = Configuration.GetConnectionString("HackWeekly");
-
-            services.AddDbContext<EmeraldChameleonChatContext>(options => options.UseMySql(
-                (connectionString), ServerVersion.AutoDetect(connectionString)
-                ));
-            //services.AddDbContext<EmeraldChameleonChatContext>(dbContextOptions => dbContextOptions.UseSqlite("Data Source=WeatherInfo.db"));// adds the dbcontext with a scoped lifetime
-            services.AddScoped<IChatRoomMessageRepository, ChatRoomMessageRepository>();
-            services.AddDbContext<EmeraldChameleonChatContext>(options => options.UseMySql(
-                (connectionString), ServerVersion.AutoDetect(connectionString)
-                ));
-            //services.AddDbContext<EmeraldChameleonChatContext>(dbContextOptions => dbContextOptions.UseSqlite("Data Source=WeatherInfo.db"));// adds the dbcontext with a scoped lifetime
-            services.AddScoped<IWeatherForecastRepository, WeatherForecastRepository>();
-            services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IUserService, UserService>();
-            services.AddScoped<IAuthenticationService, AuthenticationService>();
-            services.AddScoped<IEmailService, EmailService>();
             
+            services.AddDbContext<EmeraldChameleonChatContext>(options => options.UseMySql(
+                (connectionString), ServerVersion.AutoDetect(connectionString)
+                ));
 
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+            {
+                //options.RequireHttpsMetadata = false;
+                options.SaveToken = false;
+                options.TokenValidationParameters = new TokenValidationParameters()
+                {
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+
+                    ValidIssuer = Configuration["Jwt:Issuer"],
+                    ValidAudience = Configuration["Jwt:Audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(Configuration["Jwt:Keys:Access"]))
+                };
+            });
+
+            services.AddScoped<IChatRoomMessageRepository, ChatRoomMessageRepository>();
+            services.AddScoped<IWeatherForecastRepository, WeatherForecastRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IAuthenticationService, AuthenticationService>();
