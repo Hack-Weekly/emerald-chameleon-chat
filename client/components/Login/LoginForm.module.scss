@@ -35,6 +35,11 @@
             box-shadow: none;
         }
     }
+
+    a {
+        text-decoration: none;
+        color: variables.$neutral-100;
+    }
 }
 
 .formTitle {
@@ -49,7 +54,19 @@
 
 .cancelButton {
     background-color: variables.$neutral-300;
-    color: variables.$neutral-100;
+    border: none;
+    padding: 8px;
+    width: 45%;
+    border-radius: 5px;
+    letter-spacing: 1px;
+    text-transform: capitalize;
+
+    &:hover {
+        box-shadow: 0 2px 2px 0 variables.$neutral-300;
+    }
+    &:active {
+        box-shadow: none;
+    }
 
     &:hover {
         background-color: variables.$neutral-500;

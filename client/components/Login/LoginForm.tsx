@@ -1,10 +1,10 @@
 'use client'
 import { useState } from 'react'
-// import { useRouter } from 'next/router'
+import Link from 'next/link'
 import styles from './LoginForm.module.scss'
 
-type LoginValues = { 
-  user: string,
+type LoginValues = {
+  user: string
   password: string
 }
 
@@ -13,7 +13,6 @@ export default function LoginForm() {
     user: '',
     password: '',
   })
-  // const router = useRouter()
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
@@ -69,8 +68,12 @@ export default function LoginForm() {
       />
       <div className={styles.buttonContainer}>
         {/* buttons not functional yet */}
-        <button className={styles.cancelButton}>Cancel</button>
-        <button className={styles.loginButton} type="submit">Login</button>
+        <button className={styles.cancelButton}>
+          <Link href="/">Cancel</Link>
+        </button>
+        <button className={styles.loginButton} type="submit">
+          <Link href="/messages">Login</Link>
+        </button>
       </div>
     </form>
   )
