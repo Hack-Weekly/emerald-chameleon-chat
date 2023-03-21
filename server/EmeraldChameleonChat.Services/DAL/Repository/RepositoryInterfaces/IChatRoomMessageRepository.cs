@@ -1,4 +1,5 @@
-﻿using EmeraldChameleonChat.Services.Model.Entity;
+﻿using EmeraldChameleonChat.Services.Model.DTO;
+using EmeraldChameleonChat.Services.Model.Entity;
 using EmeraldChameleonChat.Services.Model.Entity.Users;
 using System;
 using System.Collections.Generic;
@@ -10,5 +11,6 @@ namespace EmeraldChameleonChat.Services.DAL.Repository.RepositoryInterfaces
 {
     public interface IChatRoomMessageRepository : IRepository<Model.Entity.ChatRoomMessage>
     {
+        public Task<List<ChatRoomMessageDto>> GetAllMessagesByChatIdAsync(Guid chatId);
     }
 }
