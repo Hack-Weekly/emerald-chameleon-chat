@@ -7,6 +7,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.CompilerServices;
 using System.Runtime.ExceptionServices;
+using EmeraldChameleonChat.Services.Model.Entity.Users;
 
 namespace EmeraldChameleonChat.Services.Model.Entity
 {
@@ -15,17 +16,21 @@ namespace EmeraldChameleonChat.Services.Model.Entity
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; } = Guid.NewGuid();
-        [ForeignKey(nameof(ChatRoom.Id))]
-        public virtual Guid ChatRoomId { get; set; }
-        public string UserId { get; set; }
+
+        public Guid ChatRoomId { get; set; }
+        [ForeignKey(nameof(ChatRoomId))]
+        public virtual ChatRoom ChatRoom { get; set; }
+        public Guid UserId { get; set; }
+        [ForeignKey(nameof(UserId))]
+        public virtual User User { get; set; }
         public string MessageBody { get; set; }
 
         public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
 
-        public ChatRoomMessage(Guid id, Guid chatRoomId, string userId, string messageBody, DateTime dateTime) 
+        public ChatRoomMessage(Guid id, Guid chatRoomId, Guid userId, string messageBody, DateTime dateTime) 
         {
             Id = id;
-            ChatRoomId = ChatRoomId;
+            ChatRoomId = chatRoomId;
             UserId = userId;
             MessageBody = messageBody;
             CreatedDate = dateTime;

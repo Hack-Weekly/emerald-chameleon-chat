@@ -33,7 +33,7 @@ namespace EmeraldChameleonChat.Hubs
         //    await this.Clients.Group(chatRoomName).BroadcastMessageAsync(messages);
         //}
 
-        public async Task SendMessage(string user, string message)
+        public async Task SendMessage(Guid user, string message)
         {
             //await JoinRoom(room).ConfigureAwait(false);
             //await Clients.Group(room).SendAsync("ReceiveMessage", user, " joined the chatroom " + room).ConfigureAwait(true);

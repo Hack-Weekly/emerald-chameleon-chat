@@ -66,11 +66,14 @@ namespace EmeraldChameleonChat.Services.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("longtext");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("char(36)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ChatRoomId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("ChatRoomMessage");
                 });
@@ -140,6 +143,25 @@ namespace EmeraldChameleonChat.Services.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("WeatherForecast");
+                });
+
+            modelBuilder.Entity("EmeraldChameleonChat.Services.Model.Entity.ChatRoomMessage", b =>
+                {
+                    b.HasOne("EmeraldChameleonChat.Services.Model.Entity.ChatRoom", "ChatRoom")
+                        .WithMany()
+                        .HasForeignKey("ChatRoomId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EmeraldChameleonChat.Services.Model.Entity.Users.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ChatRoom");
+
+                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }
