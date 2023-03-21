@@ -64,7 +64,7 @@ namespace EmeraldChameleonChat.Hubs
             {
                 messages.Add(message.Id.ToString(), message.MessageBody);
             }
-            await Clients.Caller.SendAsync("BroadcastMessageAsync", messages);
+            await Clients.Caller.SendAsync("ReceiveMessage", messages.Keys, messages.Values);
 
             _users.Add(userId, user);
 
@@ -86,6 +86,7 @@ namespace EmeraldChameleonChat.Hubs
             var result = new ChatRoomMessage(default, ChatroomID, userId, message, DateTime.UtcNow);
             await _context.CreateAsync(result, token, true);
         }
+
 
         public Task JoinRoom(string roomName)
         {
