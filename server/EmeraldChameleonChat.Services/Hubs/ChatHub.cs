@@ -28,6 +28,7 @@ namespace EmeraldChameleonChat.Hubs
         private readonly IMapper _mapper;
         private readonly IUserRepository _userRepository;
         private static Dictionary<Guid, UserData> _users = new Dictionary<Guid, UserData>();
+        private static Dictionary<Guid, ChatHistory> _chatHistory = new Dictionary<Guid, ChatHistory>();
 
         public ChatHub(ILogger<ChatHub> logger, IChatRoomMessageRepository context, IMapper mapper, IUserRepository userRepository)
         {
@@ -56,6 +57,14 @@ namespace EmeraldChameleonChat.Hubs
                 ConnectionId = Context.ConnectionId,
                 User = await _userRepository.GetUserById(userId)
             };
+
+            List<ChatRoomMessage> chatHistory = await _context.GetChatHistory("DevRoom");
+            Dictionary<string, string> messages = new Dictionary<string, string>();
+            foreach (var message in chatHistory)
+            {
+                messages.Add(message.Id.ToString(), message.MessageBody);
+            }
+            await Clients.Caller.SendAsync("BroadcastMessageAsync", messages);
 
             _users.Add(userId, user);
 

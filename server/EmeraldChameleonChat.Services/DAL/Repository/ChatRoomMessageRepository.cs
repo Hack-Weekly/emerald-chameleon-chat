@@ -27,14 +27,28 @@ namespace EmeraldChameleonChat.Services.DAL.Repository
         {
             var response = new List<ChatRoomMessageDto>();
 
-            var allUsers = _context.ChatRoomMessage.AsNoTracking().Where(mess => mess.ChatRoomId == chatId).ToList();
-            var allUsersDto = _context.ChatRoomMessage.MapToDTO<List<ChatRoomMessageDto>>();
+            var allGroupMessages = _context.ChatRoomMessage.AsNoTracking().Where(mess => mess.ChatRoomId == chatId).ToListAsync();
+            var allGroupMessagesDto = _context.ChatRoomMessage.MapToDTO<List<ChatRoomMessageDto>>();
 
-            //var allUsers = _dbContext.Users.AsNoTracking().Where(U => U.UserId != userId).ToList();
-            //var allUsersDto = _mapper.Map<List<GetUserDTO.Response>>(allUsers);
-
-            response = allUsersDto;
+            response = allGroupMessagesDto;
             return response;
+        }
+
+        public async Task<List<ChatRoomMessage>> GetChatHistory(string chatRoomName)
+        {
+            var chatRoomId = GetChatRoomId(chatRoomName).Result;
+            return await _context.Set<ChatRoomMessage>()
+                .Where(m => m.ChatRoomId == chatRoomId)
+                .OrderBy(m => m.CreatedDate)
+                .ToListAsync();
+        }
+
+        public async Task<Guid?> GetChatRoomId(string chatRoomName)
+        {
+            var chatRoom = await _context.Set<ChatRoom>()
+                .SingleOrDefaultAsync(c => c.Name == chatRoomName);
+
+            return chatRoom?.Id;
         }
     }
 }
