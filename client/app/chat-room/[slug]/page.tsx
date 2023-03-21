@@ -1,19 +1,19 @@
 // This is a server only page. Must import client components to use hooks.
 import ChatRoomExample from '@components/ChatRoomExample/ChatRoomExample'
 
-type Props = {
+export interface Props {
   params: {
     page: string
   }
 }
 
-export default async function ChatRoomSlug({ params }: Props) {
-  const { page } = params
+export default async function ChatRoomSlug(props: Props) {
+  const { params } = props
 
   return (
     <div>
-      <h1>Welcome to page ${page}</h1>
-      <ChatRoomExample page={page} />
+      <h1>Welcome to page ${params.page}</h1>
+      <ChatRoomExample page={params.page} />
     </div>
   )
 }

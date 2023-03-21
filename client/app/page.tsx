@@ -1,6 +1,6 @@
 import ChameleonGraphic from '@components/ChameleonGraphic'
 import IntroText from '@components/IntroText/IntroText'
-import StartSwiperAndLinks from '@components/StartSwiperAndLinks'
+import LoginAndRegisterHandler from '@components/LoginAndRegisterHandler/LoginAndRegisterHandler'
 import styles from '@styles/App.module.scss'
 
 export default function Index() {
@@ -8,7 +8,7 @@ export default function Index() {
     <div className={styles.homeLayout}>
       <ChameleonGraphic />
       <IntroText />
-      <StartSwiperAndLinks />
+      <LoginAndRegisterHandler />
     </div>
   )
 }
