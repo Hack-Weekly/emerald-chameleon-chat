@@ -59,7 +59,7 @@ namespace EmeraldChameleonChat.Hubs
             };
 
             List<ChatRoomMessage> chatHistory = await _context.GetChatHistory("DevRoom");
-            Dictionary<string, string> messages = new Dictionary<string, string>();
+            //Dictionary<string, string> messages = new Dictionary<string, string>();
             foreach (var message in chatHistory)
             {
                 
