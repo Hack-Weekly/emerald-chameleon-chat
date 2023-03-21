@@ -2,7 +2,7 @@
 
 import React from 'react'
 import Image from 'next/image'
-import styles from '@styles/LoginAndRegisterHandler.module.scss'
+import styles from './LoginAndRegisterHandler.module.scss'
 import LoginForm from './Login/LoginForm'
 import Register from './Register/Register'
 import { useEffect, useRef } from 'react'
