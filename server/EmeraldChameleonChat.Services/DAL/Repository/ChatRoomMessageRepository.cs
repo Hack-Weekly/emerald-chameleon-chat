@@ -40,7 +40,7 @@ namespace EmeraldChameleonChat.Services.DAL.Repository
             return chatRoom?.Id;
         }
 
-        public async Task<List<ChatRoom>> GetActiveChatRooms()
+        public async Task<List<ChatRoom>> GetActiveGroups()
         {
             var response = await _context.Set<ChatRoom>()
                 .Where(a => a.isActive == true).ToListAsync(CancellationToken.None);
