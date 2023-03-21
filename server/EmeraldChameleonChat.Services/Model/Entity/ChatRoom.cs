@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EmeraldChameleonChat.Services.Model.Entity.Users;
 
 namespace EmeraldChameleonChat.Services.Model.Entity
 {
@@ -18,6 +19,8 @@ namespace EmeraldChameleonChat.Services.Model.Entity
         public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
         public DateTime LastConnection { get; set;}
         public Guid CreatorId { get; set; }
+        [ForeignKey(nameof(CreatorId))]
+        public virtual User User { get; set; }
         public bool isActive { get; set; }
 
         public ChatRoom()
