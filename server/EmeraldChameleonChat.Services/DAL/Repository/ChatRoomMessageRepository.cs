@@ -23,17 +23,6 @@ namespace EmeraldChameleonChat.Services.DAL.Repository
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public async Task<List<ChatRoomMessageDto>> GetAllMessagesByChatIdAsync(Guid chatId)
-        {
-            var response = new List<ChatRoomMessageDto>();
-
-            var allGroupMessages = _context.ChatRoomMessage.AsNoTracking().Where(mess => mess.ChatRoomId == chatId).ToListAsync();
-            var allGroupMessagesDto = _context.ChatRoomMessage.MapToDTO<List<ChatRoomMessageDto>>();
-
-            response = allGroupMessagesDto;
-            return response;
-        }
-
         public async Task<List<ChatRoomMessage>> GetChatHistory(string chatRoomName)
         {
             var chatRoomId = GetChatRoomId(chatRoomName).Result;

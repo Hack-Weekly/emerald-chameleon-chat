@@ -62,9 +62,11 @@ namespace EmeraldChameleonChat.Hubs
             Dictionary<string, string> messages = new Dictionary<string, string>();
             foreach (var message in chatHistory)
             {
-                messages.Add(message.Id.ToString(), message.MessageBody);
+                
+                //messages.Add(message.Id.ToString(), message.MessageBody);
+                await Clients.Caller.SendAsync("ReceiveMessage", message.User.Name, message.MessageBody);
             }
-            await Clients.Caller.SendAsync("ReceiveMessage", messages.Keys, messages.Values);
+            //await Clients.Caller.SendAsync("ReceiveMessage", messages.Keys, messages.Values);
 
             _users.Add(userId, user);
 

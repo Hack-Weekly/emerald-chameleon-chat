@@ -13,22 +13,5 @@ namespace EmeraldChameleonChat.Services.Model.DTO
         public string UserId { get; set; }
         public string MessageBody { get; set; }
         public DateTime CreatedDate { get; set; }
-        public class Request
-        {
-            public string Name { get; set; }
-            public string UserId { get; set; }
-            public string MessageBody { get; set; }
-            public DateTime CreatedDate { get; set; }
-        }
-
-        public class Response
-        {
-            public Guid Id { get; set; }
-            public string Name { get; set; }
-            public string UserId { get; set; }
-            public string MessageBody { get; set; }
-            public DateTime CreatedDate { get; set; }
-        }
-        
     }
 }

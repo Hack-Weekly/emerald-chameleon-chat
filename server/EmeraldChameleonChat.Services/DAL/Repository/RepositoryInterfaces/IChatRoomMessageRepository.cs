@@ -11,9 +11,7 @@ namespace EmeraldChameleonChat.Services.DAL.Repository.RepositoryInterfaces
 {
     public interface IChatRoomMessageRepository : IRepository<Model.Entity.ChatRoomMessage>
     {
-        public Task<List<ChatRoomMessageDto>> GetAllMessagesByChatIdAsync(Guid chatId);
         Task<List<ChatRoomMessage>> GetChatHistory(string chatRoomName);
-
         Task<Guid?> GetChatRoomId(string chatRoomName);
     }
 }
