@@ -1,4 +1,4 @@
-import EmailConfirmed from '@components/EmailConfirmed/EmailConfirmed'
+import EmailConfirmed from '@components/EmailConfirmation/EmailConfirmation'
 
 // ------------ TEMPORARY PAGE FOR VIEWING COMPONENT ----------
 

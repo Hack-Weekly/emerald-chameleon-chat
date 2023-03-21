@@ -1,8 +1,8 @@
 'use client'
 
-import React, { useRef, useState, useContext } from 'react'
+import React, { useState, useRef } from 'react'
 import ChameleonGraphic from '@components/ChameleonGraphic'
-import styles from './EmailConfirmed.module.scss'
+import styles from './EmailConfirmation.module.scss'
 import LoginForm from '@components/LoginAndRegisterHandler/Login/LoginForm'
 
 // ------------ DESCRIPTION AND CRITERIA ----------
@@ -13,19 +13,19 @@ import LoginForm from '@components/LoginAndRegisterHandler/Login/LoginForm'
 //   Link for user to navigate back to login screen on successful response
 // ------------------------------------------------
 
-function EmailConfirmed() {
+function EmailConfirmation() {
+  console.log('Email Confirmed rendered')
   const [showForm, setShowForm] = useState(true)
   const [showSuccessMessage, setShowSuccessMessage] = useState(false)
   const [showErrorMessage, setShowErrorMessage] = useState(false)
   const [confirmationCode, setConfirmationCode] = useState('')
   const [showLoginForm, setShowLoginForm] = useState(false)
-  
+
   function FailureMessage() {
     const handleClick = () => {
       setShowForm(true)
       setShowErrorMessage(false)
     }
-
     return (
       <div className={styles.failureWrapper} >
         <p>{'Your email could not be verified'}</p>
@@ -48,6 +48,9 @@ function EmailConfirmed() {
   }
 
   const ConfirmationCodeForm = () => {
+    const requiredFieldText = useRef<HTMLParagraphElement>(null)
+    const submitButton = useRef<HTMLButtonElement>(null)
+    const inputField = useRef<HTMLInputElement>(null)
     // const baseUrl =
     //   'https://house-plants2.p.rapidapi.com/id/53417c12-4824-5995-bce0-b81984ebbd1d'
 
@@ -60,14 +63,17 @@ function EmailConfirmed() {
     // send http GET request to
     const handleSubmit = (e: { preventDefault: () => void }) => {
       e.preventDefault()
-      setShowForm(false)
       // form.current?.setAttribute('style', 'display: none')
       console.log('submit button clicked')
+      // no input
+
       // correct confirmation code
       if (confirmationCode === '1') {
+        setShowForm(false)
         setShowSuccessMessage(true)
         // incorrect confirmation code
       } else if (confirmationCode === '2'){
+        setShowForm(false)
         setShowErrorMessage(true)
       }
       // const options = {
@@ -94,10 +100,12 @@ function EmailConfirmed() {
             id="confirmationCode"
             name="confirmationCode"
             value={confirmationCode}
+            ref={inputField}
             onChange={(e) => setConfirmationCode(e.target.value)}
           />
-          <div className={styles.buttons}>
-            <button className={styles.submitButton} type="submit">
+          <p ref={requiredFieldText}>Please enter your code</p>
+          <div className={styles.button}>
+            <button className={styles.submitButton} type="submit" ref={submitButton}>
               Submit
             </button>
           </div>
@@ -122,7 +130,4 @@ function EmailConfirmed() {
   )
 }
 
-
-
-
-export default EmailConfirmed
+export default EmailConfirmation
