@@ -28,7 +28,6 @@ namespace EmeraldChameleonChat.Hubs
         private readonly IMapper _mapper;
         private readonly IUserRepository _userRepository;
         private static Dictionary<Guid, UserData> _users = new Dictionary<Guid, UserData>();
-        private static Dictionary<Guid, ChatHistory> _chatHistory = new Dictionary<Guid, ChatHistory>();
 
         public ChatHub(ILogger<ChatHub> logger, IChatRoomMessageRepository context, IMapper mapper, IUserRepository userRepository)
         {
