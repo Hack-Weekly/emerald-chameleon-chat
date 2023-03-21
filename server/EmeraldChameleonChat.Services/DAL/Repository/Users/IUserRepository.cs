@@ -14,6 +14,6 @@ namespace EmeraldChameleonChat.Services.Repository
         Task<bool> UserExists(string username, string email);
         Task<User> GetUserByUserName(string username);
         Task<User> GetUserByEmail(string email);
-
+        Task<User> GetUserById(Guid userId);
     }
 }

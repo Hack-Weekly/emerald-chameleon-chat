@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using EmeraldChameleonChat.Services.Model.Entity;
 using EmeraldChameleonChat.Services.DAL.Repository.RepositoryInterfaces;
+using EmeraldChameleonChat.Services.Model.Entity.Users;
+using Microsoft.AspNetCore.Mvc;
 
 namespace EmeraldChameleonChat.Services.DAL.Repository
 {
