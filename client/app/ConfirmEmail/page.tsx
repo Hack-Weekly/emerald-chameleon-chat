@@ -36,10 +36,11 @@ function EmailConfirmation() {
     return (
       <div className={styles.messageBoxWrapper}>
         <h3>{message}</h3>
-        {isSuccess && <Link href={hrefText} className={styles.messageBox__link}>
-          {buttonText}
+        {isSuccess && (
+          <Link href={hrefText} className={styles.messageBox__link}>
+            {buttonText}
           </Link>
-        }
+        )}
         {!isSuccess && (
           <button className={styles.messageBox__link} onClick={handleTryAgainClick}>
             {buttonText}
@@ -51,31 +52,31 @@ function EmailConfirmation() {
 
   const ConfirmationCodeForm = () => {
     const [confirmationCodeInput, setConfirmationCodeInput] = useState('')
-    // const baseUrl =
-    //   'https://house-plants2.p.rapidapi.com/id/53417c12-4824-5995-bce0-b81984ebbd1d'
 
- 
     const handleSubmit = (e: { preventDefault: () => void }) => {
       e.preventDefault()
-      console.log('submit button clicked')
-      if (confirmationCodeInput === 'good') {
+
+      // <<<<<<<<<<<<<<<<
+      // for testing UI until actual http request is set up
+      if (confirmationCodeInput === '123') {
         setResponseMessage('success')
       } else {
         setResponseMessage('failure')
       }
       setShowForm(false)
       setShowSuccessOrFailureMessage(true)
+      // >>>>>>>>>>>>>>>>>
+
+      // send http request to the backend confirmation url
+      // const baseUrl = '/api/Users/Confirmation'
       // const options = {
       //   method: 'GET',
-      //   headers: {
-      //     'X-RapidAPI-Key': '3278048d53mshaf4402d97a086bep1bbe45jsnc2254c9864fd',
-      //     'X-RapidAPI-Host': 'house-plants2.p.rapidapi.com'
-      //   }
+      //   headers: {}
       // }
       // try {
       //   const response = await fetch(baseUrl, options)
       //   const data = await response.json()
-      //   console.log(data)
+      //
       // } catch (error) {
       //   console.log(error)
       // }
