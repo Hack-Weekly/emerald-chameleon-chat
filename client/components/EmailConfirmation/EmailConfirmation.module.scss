@@ -67,49 +67,26 @@
     }
 }
     
-
-
-.successWrapper {
+.messageBoxWrapper {
+    
     background-color: v.$neutral-100;
     padding: 2rem;
-    border: 2px solid v.$primary-light;
+    border: 2px solid v.$neutral-700;
     border-radius: 15px;
-    
-    p{
-        color: v.$primary-dark;
-    }
+    color: v.$primary-dark;
+   
 
-    button {
+    .messageBox__link {
+        display: inline-block;
+        background-color: v.$primary-dark;
         padding: .5rem 1rem;
-        background-color: v.$primary-light;
-        border: none;
-        border-radius: 5px;
-        margin-top: 1.5rem;
-        font-size: v.$base-font-size;
-    }
-}
-
-.failureWrapper {
-    background-color: v.$neutral-100;
-    padding: 2rem;
-    border: 2px solid v.$secondary;
-    border-radius: 15px;
-    
-    p {
-        color: v.$secondary;
-    }
-
-    button {
-        padding: .5rem 1rem;
-        background-color: v.$secondary;
+        margin: 2rem auto 0 auto;
         color: v.$neutral-100;
+        text-decoration: none;
+    }
+
+    button {
         border: none;
-        border-radius: 5px;
-        margin-top: 1.5rem;
-        font-size: v.$base-font-size;
     }
 }
 
-.hide {
-    display: none;
-}
