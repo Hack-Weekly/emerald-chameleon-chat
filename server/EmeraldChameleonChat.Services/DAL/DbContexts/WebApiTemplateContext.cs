@@ -16,6 +16,13 @@ namespace EmeraldChameleonChat.Services.DAL.DbContexts
         { 
             //by exposing this constructor, we can provide these options at the moment we register the dbcontext on the pipeline.
         }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<ChatRoom>()
+                .HasIndex(u => u.Name)
+                .IsUnique();
+        }
     }
 }
 

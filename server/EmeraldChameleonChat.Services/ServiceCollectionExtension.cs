@@ -44,6 +44,7 @@ namespace EmeraldChameleonChat.Services
             });
 
             services.AddScoped<IChatRoomMessageRepository, ChatRoomMessageRepository>();
+            services.AddScoped<IChatRoomRepository, ChatRoomRepository>();
             services.AddScoped<IWeatherForecastRepository, WeatherForecastRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();

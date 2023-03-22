@@ -11,11 +11,7 @@ namespace EmeraldChameleonChat.Services.Model.DTO
     public class ChatRoomDto : IDTO
     {
         public string Name { get; set; }
-        public Guid Id { get; set; }
         public string Description { get; set; }
-        public DateTime CreatedDate { get; set; }
-        public DateTime LastConnection { get; set; }
-        public Guid CreatorId { get; set; }
         public bool isActive { get; set; }
     }
 }

@@ -9,6 +9,8 @@ namespace EmeraldChameleonChat.Services.AutoMapperProfiles
         public DTOToEntityProfile()
         {
             CreateMap<ChatRoomMessageDto, ChatRoomMessage>();
+
+            CreateMap<ChatRoomDto, ChatRoom>();
             //GET mappings
             CreateMap<WeatherForecastGetDto, WeatherForecast>();
 

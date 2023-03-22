@@ -13,7 +13,6 @@ namespace EmeraldChameleonChat.Services.DAL.Repository.RepositoryInterfaces
     {
         Task<List<ChatRoomMessage>> GetChatHistory(string chatRoomName);
         Task<Guid?> GetChatRoomId(string chatRoomName);
-
         Task<List<ChatRoom>> GetActiveGroups();
     }
 }
