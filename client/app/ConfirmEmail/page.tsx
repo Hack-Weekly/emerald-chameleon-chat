@@ -8,10 +8,9 @@ import Link from 'next/link'
 function EmailConfirmation() {
   console.log('Email Confirmed rendered')
   const [showForm, setShowForm] = useState(true)
- 
   const [responseMessage, setResponseMessage] = useState('')
-  const [showSuccessOrFailureMessage, setShowSuccessOrFailureMessage] = useState(false)
-
+  const [showSuccessOrFailureMessage, setShowSuccessOrFailureMessage] =
+    useState(false)
 
   function SuccessOrFailureHandler() {
     let message = ''
@@ -55,13 +54,7 @@ function EmailConfirmation() {
     // const baseUrl =
     //   'https://house-plants2.p.rapidapi.com/id/53417c12-4824-5995-bce0-b81984ebbd1d'
 
-    // onSubmit, GET request to server
-    // compare confirmation code entered to value on server
-    // need to know parameters for GET request (userID, email, etc?)
-    // if success (codes match), display success message to user
-    // if failure (codes don't match), display failure message
-    // if other error, display different error message
-    // send http GET request to
+ 
     const handleSubmit = (e: { preventDefault: () => void }) => {
       e.preventDefault()
       console.log('submit button clicked')
