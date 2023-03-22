@@ -1,56 +1,38 @@
 'use client'
 
-import React, { useState, useRef } from 'react'
+import React, { useState } from 'react'
 import ChameleonGraphic from '@components/ChameleonGraphic'
 import styles from './EmailConfirmation.module.scss'
-import LoginForm from '@components/LoginAndRegisterHandler/Login/LoginForm'
 
-// ------------ DESCRIPTION AND CRITERIA ----------
-// When users register for an account, they must confirm their email. Need a nice looking page that sends an httprequest to /api/Users/Confirmation and handles the success/failure
-
-// Component submits httprequest with provided confirmation code in url query string & handles the success/response
-
-//   Link for user to navigate back to login screen on successful response
-// ------------------------------------------------
 
 function EmailConfirmation() {
   console.log('Email Confirmed rendered')
   const [showForm, setShowForm] = useState(true)
-  const [showSuccessMessage, setShowSuccessMessage] = useState(false)
-  const [showErrorMessage, setShowErrorMessage] = useState(false)
-  const [confirmationCode, setConfirmationCode] = useState('')
-  const [showLoginForm, setShowLoginForm] = useState(false)
+  const [showSuccessOrFailureMessage, setShowSuccessOrFailureMessage] = useState(false)
 
-  function FailureMessage() {
-    const handleClick = () => {
-      setShowForm(true)
-      setShowErrorMessage(false)
+  let isConfirmationSuccessful = true
+
+
+  const SuccessOrFailureHandler = (isConfirmationSuccessful: boolean) => {
+    let message = ''
+    let buttonText = ''
+    if (isConfirmationSuccessful) {
+      message = 'Yay! Email has been confirmed'
+      buttonText = 'Login'
+    } else {
+      message = 'Email could not be verified'
+      buttonText = 'Try Again'
     }
     return (
-      <div className={styles.failureWrapper} >
-        <p>{'Your email could not be verified'}</p>
-        <button onClick={handleClick}>Try Again</button>
-      </div>
-    )
-  }
-
-  function SuccessMessage() {
-    const handleClick = () => {
-      setShowSuccessMessage(false)
-      setShowLoginForm(true)
-    }
-    return (
-      <div className={styles.successWrapper}>
-        <p> {'Your email has been confirmed!'}</p>
-        <button onClick={handleClick}>Login</button>
+      <div className={styles.messageBoxWrapper}>
+        <h3>{message}</h3>
+        <button>{buttonText}</button>
       </div>
     )
   }
 
   const ConfirmationCodeForm = () => {
-    const requiredFieldText = useRef<HTMLParagraphElement>(null)
-    const submitButton = useRef<HTMLButtonElement>(null)
-    const inputField = useRef<HTMLInputElement>(null)
+ 
     // const baseUrl =
     //   'https://house-plants2.p.rapidapi.com/id/53417c12-4824-5995-bce0-b81984ebbd1d'
 
@@ -63,24 +45,7 @@ function EmailConfirmation() {
     // send http GET request to
     const handleSubmit = (e: { preventDefault: () => void }) => {
       e.preventDefault()
-      // form.current?.setAttribute('style', 'display: none')
       console.log('submit button clicked')
-      console.log('confirmation code: ', confirmationCode)
-      // no input
-      if (confirmationCode === '') {
-        console.log('no input')
-      }
-      // correct confirmation code
-      if (confirmationCode === '1') {
-        setShowForm(false)
-        setShowSuccessMessage(true)
-        // incorrect confirmation code
-      } else if (confirmationCode === '2'){
-        setShowForm(false)
-        setShowErrorMessage(true)
-      }
-
-      console.log('input field : ', inputField.current?.value)
       // const options = {
       //   method: 'GET',
       //   headers: {
@@ -100,16 +65,10 @@ function EmailConfirmation() {
       <div>
         <form onSubmit={handleSubmit} className={styles.formWrapper}>
           <label htmlFor="confirmationCode">Confirmation code:</label>
-          <input
-            type="text"
-            id="confirmationCode"
-            name="confirmationCode"
-            value={confirmationCode}
-            ref={inputField}
-          />
-          <p ref={requiredFieldText}>Please enter your code</p>
+          <input type="text" id="confirmationCode" name="confirmationCode" />
+          <p>Please enter your code</p>
           <div className={styles.button}>
-            <button className={styles.submitButton} type="submit" ref={submitButton}>
+            <button className={styles.submitButton} type="submit">
               Submit
             </button>
           </div>
@@ -127,9 +86,7 @@ function EmailConfirmation() {
       <ChameleonGraphic />
       <h1>Email Confirmation</h1>
       {showForm && <ConfirmationCodeForm />}
-      {showSuccessMessage && <SuccessMessage />}
-      {showErrorMessage && <FailureMessage />}
-      {showLoginForm && <LoginForm />}
+      {showSuccessOrFailureMessage && <SuccessOrFailureHandler />}
     </div>
   )
 }
