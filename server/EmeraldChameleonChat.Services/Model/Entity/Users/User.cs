@@ -7,15 +7,15 @@ namespace EmeraldChameleonChat.Services.Model.Entity.Users
         public Guid Id { get; set; }
 
         [EmailAddress]
-        public string Email { get; set; } = string.Empty;
+        public string? Email { get; set; } = string.Empty;
 
-        public string Mobile { get; set; } = string.Empty;
+        public string? Mobile { get; set; } = string.Empty;
 
-        public string Name { get; set;  } = string.Empty;
+        public string? Name { get; set; } = string.Empty;
 
-        [Required] 
+        [Required]
         public string Username { get; set; } = string.Empty;
-        [Required] 
+        [Required]
         public string Password { get; set; } = string.Empty;
 
         public string? RefreshToken { get; set; }

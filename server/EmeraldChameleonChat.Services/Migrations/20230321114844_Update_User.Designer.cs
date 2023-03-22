@@ -3,6 +3,7 @@ using System;
 using EmeraldChameleonChat.Services.DAL.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EmeraldChameleonChat.Services.Migrations
 {
     [DbContext(typeof(EmeraldChameleonChatContext))]
-    partial class EmeraldChameleonChatContextModelSnapshot : ModelSnapshot
+    [Migration("20230321114844_Update_User")]
+    partial class Update_User
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.4");
