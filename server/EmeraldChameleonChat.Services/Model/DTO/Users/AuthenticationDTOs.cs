@@ -6,7 +6,7 @@ namespace EmeraldChameleonChat.Services.Model.DTO.Users
     public class RegisterDTO
     {
         public string? Name { get; set; }
-        [EmailAddress, Required] public string Email { get; set; } = string.Empty;
+        [EmailAddress] public string? Email { get; set; }
         public string? Mobile { get; set; }
 
         [Required] public string Username { get; set; } = string.Empty;
