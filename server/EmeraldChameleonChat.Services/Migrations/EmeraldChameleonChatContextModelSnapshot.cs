@@ -52,7 +52,7 @@ namespace EmeraldChameleonChat.Services.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("Chatroom");
+                    b.ToTable("Chatroom", (string)null);
                 });
 
             modelBuilder.Entity("EmeraldChameleonChat.Services.Model.Entity.ChatRoomMessage", b =>
@@ -80,7 +80,7 @@ namespace EmeraldChameleonChat.Services.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ChatRoomMessage");
+                    b.ToTable("ChatRoomMessage", (string)null);
                 });
 
             modelBuilder.Entity("EmeraldChameleonChat.Services.Model.Entity.Users.User", b =>
@@ -123,7 +123,7 @@ namespace EmeraldChameleonChat.Services.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("EmeraldChameleonChat.Services.Model.Entity.WeatherForecast", b =>
@@ -147,7 +147,7 @@ namespace EmeraldChameleonChat.Services.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("WeatherForecast");
+                    b.ToTable("WeatherForecast", (string)null);
                 });
 
             modelBuilder.Entity("EmeraldChameleonChat.Services.Model.Entity.ChatRoom", b =>

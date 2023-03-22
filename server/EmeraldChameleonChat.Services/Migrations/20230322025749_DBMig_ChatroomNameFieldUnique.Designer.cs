@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EmeraldChameleonChat.Services.Migrations
 {
     [DbContext(typeof(EmeraldChameleonChatContext))]
-    [Migration("20230322010639_test")]
-    partial class test
+    [Migration("20230322025749_DBMig_ChatroomNameFieldUnique")]
+    partial class DBMig_ChatroomNameFieldUnique
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
