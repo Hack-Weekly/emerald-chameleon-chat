@@ -25,7 +25,7 @@ connection.start()
     })
     .catch(function (err) {
     return console.error(err.toString());
-});
+    });
 
 document.getElementById("sendButton").addEventListener("click", function (event) {
     var roomName = document.getElementById("roomInput").value;

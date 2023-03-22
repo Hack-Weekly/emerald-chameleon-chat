@@ -14,12 +14,12 @@ using System.Security.Claims;
 using EmeraldChameleonChat.Services.Repository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
-using EmeraldChameleonChat.Services.Hubs;
 using System.Linq;
 using EmeraldChameleonChat.Services.Model.Entity.Users;
 using Microsoft.EntityFrameworkCore;
 using EmeraldChameleonChat.Services.Model.DTO.Users;
 using Microsoft.AspNetCore.Mvc;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace EmeraldChameleonChat.Hubs
 {
@@ -31,7 +31,6 @@ namespace EmeraldChameleonChat.Hubs
         private readonly IChatRoomRepository _chatRoomRepository;
         private readonly IMapper _mapper;
         private readonly IUserRepository _userRepository;
-        private static Dictionary<Guid, UserData> _users = new Dictionary<Guid, UserData>();
 
         public ChatHub(ILogger<ChatHub> logger, IChatRoomMessageRepository context, IMapper mapper, IUserRepository userRepository, IChatRoomRepository chatRoomRepository)
         {
@@ -44,23 +43,13 @@ namespace EmeraldChameleonChat.Hubs
         public override async Task<Task> OnConnectedAsync()
         {
             //Get connected user details
-            Guid userId = Guid.Parse(Context.User.FindFirstValue(ClaimTypes.NameIdentifier));
-            var user = new UserData()
-            {
-                ConnectedAt = DateTime.Now,
-                ConnectionId = Context.ConnectionId, 
-                User = await _userRepository.GetUserById(userId)
-            };
-            _users.Add(userId, user);
+            var userId = Guid.Parse(Context.User.FindFirstValue(ClaimTypes.NameIdentifier));
+            User currentUser = await _userRepository.GetUserById(userId);
+            var userName = currentUser.Username;
 
-            JoinRoom("Dumping Grounds");
+            //await JoinRoom("Dumping Grounds");
 
             return base.OnConnectedAsync();
-        }
-
-        public override async Task OnDisconnectedAsync(Exception? exception)
-        {
-            await base.OnDisconnectedAsync(exception);
         }
 
         //Get Chat history
@@ -76,9 +65,10 @@ namespace EmeraldChameleonChat.Hubs
         //Send Message in chatroom
         public async Task SendMessage(string roomName, string message)
         {
+            var userId = Guid.Parse(Context.User.FindFirstValue(ClaimTypes.NameIdentifier));
+            User currentUser = await _userRepository.GetUserById(userId);
+            var userName = currentUser.Username;
             var chatroomID = Guid.Parse(_chatMessageRepository.GetChatRoomId(roomName).Result.ToString());
-            var userId = Guid.Parse(_users.FirstOrDefault().Key.ToString());
-            var userName = _users.FirstOrDefault().Value.User.Username;
 
             CancellationToken token = new();
             await Clients.Group(roomName).SendAsync("ReceiveMessage", userName, message).ConfigureAwait(false);
@@ -96,27 +86,35 @@ namespace EmeraldChameleonChat.Hubs
         //Join new chatroom
         public async Task JoinRoom(string roomName)
         {
-            await Groups.AddToGroupAsync(Context.ConnectionId, roomName);
+            //Get connected user details
+            var userId = Guid.Parse(Context.User.FindFirstValue(ClaimTypes.NameIdentifier));
+            User currentUser = await _userRepository.GetUserById(userId);
+            var userName = currentUser.Username;
 
-            var userName = _users.FirstOrDefault().Value.User.Username;
-            
+            await Groups.AddToGroupAsync(Context.ConnectionId, roomName);
             await Clients.Group(roomName).SendAsync("ReceiveMessage",userName , " joined the chatroom " + roomName).ConfigureAwait(true);
         }
 
         //Leave chatroom
         public async Task LeaveRoom(string roomName)
         {
+            //Get connected user details
+            var userId = Guid.Parse(Context.User.FindFirstValue(ClaimTypes.NameIdentifier));
+            User currentUser = await _userRepository.GetUserById(userId);
+            var userName = currentUser.Username;
+
             await Groups.RemoveFromGroupAsync(Context.ConnectionId, roomName);
-
-            var userName = _users.FirstOrDefault().Value.User.Username;
-
             await Clients.Group(roomName).SendAsync("ReceiveMessage", userName, " joined the chatroom " + roomName).ConfigureAwait(true);
         }
 
         //Create new chatroom
         public async Task CreateChatroom(string roomName, string roomDescription) 
         {
-            var userId = Guid.Parse(_users.FirstOrDefault().Key.ToString());
+            //Get connected user details
+            var userId = Guid.Parse(Context.User.FindFirstValue(ClaimTypes.NameIdentifier));
+            User currentUser = await _userRepository.GetUserById(userId);
+            var userName = currentUser.Username;
+
             CancellationToken token = new();
             var result = new ChatRoom(roomName,roomDescription,userId);
             await _chatRoomRepository.CreateAsync(result, token, true);
