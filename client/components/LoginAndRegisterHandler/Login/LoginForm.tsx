@@ -38,8 +38,8 @@ export default function LoginForm() {
       const data = await res.json()
 
       if (res.ok) {
-        // redirect to messages screen after login
-        // router.push('/messages')
+        // redirect to chatrooms screen after login
+        // router.push('/chatrooms')
       } else {
         alert(data.message)
       }
