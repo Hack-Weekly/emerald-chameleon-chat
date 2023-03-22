@@ -65,8 +65,11 @@ function EmailConfirmation() {
       e.preventDefault()
       // form.current?.setAttribute('style', 'display: none')
       console.log('submit button clicked')
+      console.log('confirmation code: ', confirmationCode)
       // no input
-
+      if (confirmationCode === '') {
+        console.log('no input')
+      }
       // correct confirmation code
       if (confirmationCode === '1') {
         setShowForm(false)
@@ -76,6 +79,8 @@ function EmailConfirmation() {
         setShowForm(false)
         setShowErrorMessage(true)
       }
+
+      console.log('input field : ', inputField.current?.value)
       // const options = {
       //   method: 'GET',
       //   headers: {
@@ -101,7 +106,6 @@ function EmailConfirmation() {
             name="confirmationCode"
             value={confirmationCode}
             ref={inputField}
-            onChange={(e) => setConfirmationCode(e.target.value)}
           />
           <p ref={requiredFieldText}>Please enter your code</p>
           <div className={styles.button}>
