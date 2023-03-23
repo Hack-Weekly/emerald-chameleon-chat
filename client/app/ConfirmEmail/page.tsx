@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useState } from 'react'
-import ChameleonGraphic from '@components/ChameleonGraphic'
 import styles from './EmailConfirmation.module.scss'
 import Link from 'next/link'
 
@@ -20,7 +19,7 @@ function EmailConfirmation() {
     if (responseMessage === 'success') {
       message = 'Yay! Email has been confirmed'
       buttonText = 'Login'
-      hrefText = '/Login'
+      hrefText = '/login'
       isSuccess = true
     } else if (responseMessage === 'failure') {
       message = 'Email could not be verified'
@@ -83,6 +82,10 @@ function EmailConfirmation() {
     }
     return (
       <div>
+        <div className={styles.instructions}>
+          <p>{'A confirmation code was sent to the email you provided.'}</p>
+          <p>{'Please enter that code below in order to confirm your email.'}</p>
+        </div>
         <form onSubmit={handleSubmit} className={styles.formWrapper}>
           <label htmlFor="confirmationCode">Confirmation code:</label>
           <input
@@ -99,20 +102,16 @@ function EmailConfirmation() {
             </button>
           </div>
         </form>
-        <div className={styles.instructions}>
-          <p>{'A confirmation code was sent to the email you provided.'}</p>
-          <p>{'Please enter that code below in order to confirm your email.'}</p>
-        </div>
       </div>
     )
   }
 
   return (
     <div className={styles.pageWrapper}>
-      <ChameleonGraphic />
       <h1>Email Confirmation</h1>
       {showForm && <ConfirmationCodeForm />}
       {showSuccessOrFailureMessage && <SuccessOrFailureHandler />}
+      <Link className={styles.homeLink} href="/">Back to Home</Link>
     </div>
   )
 }

@@ -3,13 +3,7 @@
 import React from 'react'
 import Image from 'next/image'
 import styles from './LoginAndRegisterHandler.module.scss'
-<<<<<<< HEAD
-import LoginForm from './Login/LoginForm'
-import Register from './Register/Register'
-import { useEffect, useRef } from 'react'
-=======
 import Link from 'next/link'
->>>>>>> main
 
 function LoginAndRegisterHandler() {
   return (
