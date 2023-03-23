@@ -1,5 +1,7 @@
+'use client'
 import Link from 'next/link'
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import styles from './CreateNewChat.module.scss'
 
 type CreateChatValues = {
@@ -12,6 +14,8 @@ export default function CreateNewChat() {
     name: '',
     description: '',
   })
+
+  const router = useRouter()
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
@@ -28,15 +32,15 @@ export default function CreateNewChat() {
       const res = await fetch('api/create', {
         method: 'POST',
         body: JSON.stringify(formValues),
-        // headers: {
-        //   "Content-Type": "application/json"
-        // }
+        headers: {
+          'Content-Type': 'application/json'
+        }
       })
       const data = await res.json()
 
       if (res.ok) {
         // redirect to chatrooms screen after login
-        // router.push('/chatrooms')
+        router.push('/chatrooms')
       } else {
         alert(data.message)
       }
@@ -46,16 +50,19 @@ export default function CreateNewChat() {
   }
 
   return (
-    <div>
+    <div className={styles.wrapper}>
       {/** /chatroom doesn't exist yet */}
-      <Link href="/chatrooms">&rarr; Back</Link>
+      <div className={styles.titleWrapper}>
+        <Link href="/chatrooms">&#x25c4; Back</Link>
+        <h2 className={styles.title}>New Chat</h2>
+      </div>
       <form onSubmit={handleSubmit}>
-        <h2>New Chat</h2>
-
         <input 
           id="name"
           type="text"
           name="name"
+          placeholder="Name"
+          required
           value={formValues.name}
           onChange={handleInputChange}
         />
@@ -64,6 +71,8 @@ export default function CreateNewChat() {
           id="description"
           type="text"
           name="description"
+          placeholder="Description"
+          required
           value={formValues.description}
           onChange={handleInputChange}
         />

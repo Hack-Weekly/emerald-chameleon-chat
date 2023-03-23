@@ -3,64 +3,115 @@
 .formWrapper {
     margin: 20px auto;
     padding: 8px;
-    width: 300px;
+    width: 80%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-evenly;
 
-    border: 1px solid variables.$neutral-900;
+    border: 1px solid variables.$neutral-300;
     border-radius: 10px;
     box-shadow: 0 4px 4px 0 variables.$neutral-300;
 
     input {
-        width: 50%;
+        width: 80%;
         margin: 8px 0;
+        padding: 4px;
         border: none;
         border-radius: 4px;
         background-color: variables.$neutral-300;
+        filter: opacity(0.8);
+
+        &:hover {
+            filter: opacity(1);
+            box-shadow: 0 4px 4px 0 variables.$neutral-300;
+        }
+        &:active, &:focus {
+            outline: none;
+            border-bottom: 2px solid variables.$primary-dark;
+            box-shadow: 0 4px 4px 0 variables.$neutral-300;
+        }
     }
 
-    button {
+    a, button {
         border: none;
         padding: 8px;
-        width: 45%;
         border-radius: 5px;
         letter-spacing: 1px;
         text-transform: capitalize;
 
         &:hover {
-            box-shadow: 0 2px 2px 0 variables.$neutral-300;
+            box-shadow: 0 4px 4px 0 variables.$neutral-300;
         }
         &:active {
             box-shadow: none;
         }
     }
+
+    a {
+        text-decoration: none;
+        color: variables.$neutral-200;
+        text-align: center;
+    }
 }
 
-.formTitle {
-    margin-bottom: 8px; 
+.title {
+    margin: 12px;
+    text-align: center; 
+    color: variables.$neutral-500;
 }
 
 .buttonContainer {
-    width: 140px;
+    width: 70%;
     display: flex;
     justify-content: space-between;
+    margin: 8px;
 }
 
 .cancelButton {
-    background-color: variables.$neutral-300;
-    color: variables.$neutral-100;
-
-    &:hover {
-        background-color: variables.$neutral-500;
-    }
+    background-color: variables.$neutral-500;
+    color: variables.$neutral-200;
+    width: 45%;
 }
 
 .loginButton {
     background-color: variables.$neutral-700;
-    color: variables.$neutral-100;
+    color: variables.$neutral-200;
+    width: 45%;
 
     &:hover {
         background-color: variables.$neutral-900;
+    }
+}
+
+@media(min-width: 425px) {
+    .formWrapper {
+        width: 60%;
+    }
+}
+
+@media(min-width: 1024px) {
+    .formWrapper {
+        width: 60%;
+        height: 50vh;
+
+        input {
+            padding: 8px;
+        }
+    }
+}
+
+@media(min-width: 1440px) {
+    .formWrapper{
+        width: 50%;
+
+        a, input, button {
+            padding: 16px;
+            font-size: variables.$font-size-xl;
+        }
+    }
+
+    .title {
+        font-size: variables.$font-size-xxl;
     }
 }
