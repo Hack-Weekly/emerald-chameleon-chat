@@ -52,12 +52,12 @@ function EmailConfirmation() {
   const ConfirmationCodeForm = () => {
     const [confirmationCodeInput, setConfirmationCodeInput] = useState('')
 
-    const handleSubmit = (e: { preventDefault: () => void }) => {
-      e.preventDefault()
+    const handleClick = (e: any) => {
+      console.log(e.target.value)
 
       // <<<<<<<<<<<<<<<<
       // for testing UI until actual http request is set up
-      if (confirmationCodeInput === '123') {
+      if (e.target.value === '123') {
         setResponseMessage('success')
       } else {
         setResponseMessage('failure')
@@ -65,6 +65,7 @@ function EmailConfirmation() {
       setShowForm(false)
       setShowSuccessOrFailureMessage(true)
       // >>>>>>>>>>>>>>>>>
+
 
       // send http request to the backend confirmation url
       // const baseUrl = '/api/Users/Confirmation'
@@ -81,8 +82,27 @@ function EmailConfirmation() {
       // }
     }
     return (
-      <div>
-        <div className={styles.instructions}>
+      <div className={styles.messageBoxWrapper}>
+        <h3>Click to confirm your email.</h3>
+        <button
+          className={styles.messageBox__link}
+          type="submit"
+          onClick={handleClick}
+        >
+          Confirm Email
+        </button>
+        {/* These Buttons are just for testing */}
+        <div>
+          <button onClick={handleClick} value="123">
+            Test success
+          </button>
+          <button onClick={handleClick} value="456">
+            Test failure
+          </button>
+        </div>
+        
+        {/* This is if user is supposed to enter a code */}
+        {/* <div className={styles.instructions}>
           <p>
             {'Please enter the confirmation code that was emailed to you below.'}
           </p>
@@ -102,7 +122,7 @@ function EmailConfirmation() {
               Submit
             </button>
           </div>
-        </form>
+        </form> */}
       </div>
     )
   }

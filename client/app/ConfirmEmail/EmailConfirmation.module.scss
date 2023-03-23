@@ -20,64 +20,64 @@
     }
 }
 
-.formWrapper {
-    background-color: v.$neutral-100;
-    padding: 2rem;
-    border: 2px solid v.$neutral-700;
-    border-radius: 15px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 80%;
-    margin: 0 auto;
+// .formWrapper {
+//     background-color: v.$neutral-100;
+//     padding: 2rem;
+//     border: 2px solid v.$neutral-700;
+//     border-radius: 15px;
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: center;
+//     align-items: center;
+//     width: 80%;
+//     margin: 0 auto;
         
-    label {
-        margin-bottom: 0.5rem;
-        font-size: v.$font-size-lg;
-    }
+//     label {
+//         margin-bottom: 0.5rem;
+//         font-size: v.$font-size-lg;
+//     }
 
-    input {
-        padding: 0.5rem;
-        border-radius: 5px;
-    }
+//     input {
+//         padding: 0.5rem;
+//         border-radius: 5px;
+//     }
 
-    p {
-        font-size: v.$font-size-sm;
-        color: v.$secondary;
-        display: none;
-    }
+//     p {
+//         font-size: v.$font-size-sm;
+//         color: v.$secondary;
+//         display: none;
+//     }
 
-    .button {
-        display: flex;
-        justify-content: center;
-        gap: 1rem;
-        margin-top: 2rem;
+//     .button {
+//         display: flex;
+//         justify-content: center;
+//         gap: 1rem;
+//         margin-top: 2rem;
 
-        button {
-            padding: 0.5rem 1rem;
-            font-size: v.$base-font-size;
-            border: none;
-        }
+//         button {
+//             padding: 0.5rem 1rem;
+//             font-size: v.$base-font-size;
+//             border: none;
+//         }
 
-        .submitButton {
-            background-color: v.$primary-dark;
-            color: v.$neutral-200;
-        }
-    }
+//         .submitButton {
+//             background-color: v.$primary-dark;
+//             color: v.$neutral-200;
+//         }
+//     }
 
-    }
+//     }
     
-.instructions {
+// .instructions {
    
-    color: v.$neutral-700;
-    padding: 0 3rem;
-    margin-bottom: 2rem;
+//     color: v.$neutral-700;
+//     padding: 0 3rem;
+//     margin-bottom: 2rem;
 
-    p {
-        margin-bottom: 1rem;
-    }
-}
+//     p {
+//         margin-bottom: 1rem;
+//     }
+// }
     
 .messageBoxWrapper {
     
@@ -99,6 +99,7 @@
 
     button {
         border: none;
+        cursor: pointer;
     }
 }
 
