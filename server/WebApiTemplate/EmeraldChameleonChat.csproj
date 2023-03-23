@@ -34,7 +34,6 @@
 
   <ItemGroup>
     <Folder Include="BLL\WeatherForecast\" />
-    <Folder Include="Migrations\" />
     <Folder Include="BLL\Services\" />
   </ItemGroup>
 
