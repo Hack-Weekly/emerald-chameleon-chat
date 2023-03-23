@@ -28,9 +28,8 @@ connection.start()
     });
 
 document.getElementById("sendButton").addEventListener("click", function (event) {
-    var roomName = document.getElementById("roomInput").value;
     var message = document.getElementById("messageInput").value;
-    connection.invoke("SendMessage",roomName, message).catch(function (err) {
+    connection.invoke("SendMessage", message).catch(function (err) {
         return console.error(err.toString());
     });
     event.preventDefault();
@@ -40,6 +39,22 @@ document.getElementById("newRoomButton").addEventListener("click", function (eve
     var newRoomName = document.getElementById("newRoomInput").value;
     var newRoomDescription = "This is a test description";
     connection.invoke("CreateChatroom", newRoomName, newRoomDescription).catch(function (err) {
+        return console.error(err.toString());
+    });
+    event.preventDefault();
+});
+
+document.getElementById("joinRoomButton").addEventListener("click", function (event) {
+    var roomName = document.getElementById("joinRoomInput").value;
+    connection.invoke("JoinRoom", roomName).catch(function (err) {
+        return console.error(err.toString());
+    });
+    event.preventDefault();
+});
+
+document.getElementById("leaveRoomButton").addEventListener("click", function (event) {
+    var roomName = document.getElementById("joinRoomInput").value;
+    connection.invoke("LeaveRoom", roomName).catch(function (err) {
         return console.error(err.toString());
     });
     event.preventDefault();
