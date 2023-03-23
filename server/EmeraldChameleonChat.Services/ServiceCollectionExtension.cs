@@ -20,10 +20,31 @@ namespace EmeraldChameleonChat.Services
     {
         public static IServiceCollection AddProjectServicesCollections(this IServiceCollection services, IConfiguration Configuration)
         {
-            services.AddDbContext<EmeraldChameleonChatContext>(dbContextOptions => dbContextOptions.UseSqlite(Configuration["ConnectionStrings:SQLLite"]));// adds the dbcontext with a scoped lifetime
+            var connectionString = Configuration.GetConnectionString("HackWeekly");
+            
+            services.AddDbContext<EmeraldChameleonChatContext>(options => options.UseMySql(
+                (connectionString), ServerVersion.AutoDetect(connectionString)
+                ));
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {
+                options.Events = new JwtBearerEvents
+                {
+                    OnMessageReceived = context =>
+                    {
+                        var accessToken = context.Request.Query["access_token"];
+
+                        // If the request is for our hub...
+                        var path = context.HttpContext.Request.Path;
+                        if (!string.IsNullOrEmpty(accessToken) &&
+                            (path.StartsWithSegments("/chatHub")))
+                        {
+                            // Read the token out of the query string
+                            context.Token = accessToken;
+                        }
+                        return Task.CompletedTask;
+                    }
+                };
                 //options.RequireHttpsMetadata = false;
                 options.SaveToken = false;
                 options.TokenValidationParameters = new TokenValidationParameters()
@@ -39,13 +60,14 @@ namespace EmeraldChameleonChat.Services
                 };
             });
 
-
+            services.AddScoped<IChatRoomMessageRepository, ChatRoomMessageRepository>();
+            services.AddScoped<IChatRoomRepository, ChatRoomRepository>();
             services.AddScoped<IWeatherForecastRepository, WeatherForecastRepository>();
-
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddScoped<IEmailService, EmailService>();
+
 
             return services;
         }

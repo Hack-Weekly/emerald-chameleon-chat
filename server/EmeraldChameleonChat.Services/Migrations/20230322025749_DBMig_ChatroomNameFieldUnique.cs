@@ -2,10 +2,10 @@
 
 #nullable disable
 
-namespace EmeraldChameleonChat.Migrations
+namespace EmeraldChameleonChat.Services.Migrations
 {
     /// <inheritdoc />
-    public partial class SeedDataExample : Migration
+    public partial class DBMig_ChatroomNameFieldUnique : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
