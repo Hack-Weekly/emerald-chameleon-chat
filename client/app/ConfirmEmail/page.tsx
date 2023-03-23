@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import styles from './EmailConfirmation.module.scss'
 import Link from 'next/link'
 
+
 function EmailConfirmation() {
   console.log('Email Confirmed rendered')
   const [showForm, setShowForm] = useState(true)
@@ -50,7 +51,7 @@ function EmailConfirmation() {
   }
 
   const ConfirmationCodeForm = () => {
-    const [confirmationCodeInput, setConfirmationCodeInput] = useState('')
+    // const [confirmationCodeInput, setConfirmationCodeInput] = useState('')
 
     const handleClick = (e: any) => {
       console.log(e.target.value)
@@ -65,7 +66,6 @@ function EmailConfirmation() {
       setShowForm(false)
       setShowSuccessOrFailureMessage(true)
       // >>>>>>>>>>>>>>>>>
-
 
       // send http request to the backend confirmation url
       // const baseUrl = '/api/Users/Confirmation'
@@ -92,6 +92,7 @@ function EmailConfirmation() {
           Confirm Email
         </button>
         {/* These Buttons are just for testing */}
+        <h4>Buttons for testing UI - to be removed</h4>
         <div>
           <button onClick={handleClick} value="123">
             Test success
@@ -100,7 +101,7 @@ function EmailConfirmation() {
             Test failure
           </button>
         </div>
-        
+
         {/* This is if user is supposed to enter a code */}
         {/* <div className={styles.instructions}>
           <p>
