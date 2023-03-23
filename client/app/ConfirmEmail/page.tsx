@@ -17,12 +17,12 @@ function EmailConfirmation() {
     let hrefText = ''
     let isSuccess = false
     if (responseMessage === 'success') {
-      message = 'Yay! Email has been confirmed'
+      message = 'Your email has been confirmed!'
       buttonText = 'Login'
       hrefText = '/login'
       isSuccess = true
     } else if (responseMessage === 'failure') {
-      message = 'Email could not be verified'
+      message = 'Oops! Your email could not be confirmed.'
       buttonText = 'Try Again'
       isSuccess = false
     }
@@ -83,8 +83,9 @@ function EmailConfirmation() {
     return (
       <div>
         <div className={styles.instructions}>
-          <p>{'A confirmation code was sent to the email you provided.'}</p>
-          <p>{'Please enter that code below in order to confirm your email.'}</p>
+          <p>
+            {'Please enter the confirmation code that was emailed to you below.'}
+          </p>
         </div>
         <form onSubmit={handleSubmit} className={styles.formWrapper}>
           <label htmlFor="confirmationCode">Confirmation code:</label>
