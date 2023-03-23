@@ -6,10 +6,8 @@ using Microsoft.Extensions.Logging;
 using System.Security.Claims;
 using EmeraldChameleonChat.Services.Repository;
 using Microsoft.AspNetCore.Authorization;
-using EmeraldChameleonChat.Services.Model.Entity.Users;
 using EmeraldChameleonChat.Services.Hubs;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 
 namespace EmeraldChameleonChat.Hubs
 {
@@ -35,13 +33,12 @@ namespace EmeraldChameleonChat.Hubs
         {
             //Get connected user details
             var userId = Guid.Parse(Context.User.FindFirstValue(ClaimTypes.NameIdentifier));
-            User currentUser = await _userRepository.GetUserById(userId);
-            var userName = currentUser.Username;
+            var userName = Context.User.Claims.FirstOrDefault(x => x.Type == "Username").Value;
             //store in dictionary item
             var hubUser = new HubUserSession()
             {
-                UserId= Guid.Parse(Context.User.FindFirstValue(ClaimTypes.NameIdentifier)),
-                UserName = _userRepository.GetUserById(userId).Result.Username,
+                UserId= userId , 
+                UserName = userName, 
                 ConnectedAt = DateTime.UtcNow
             };
             _users.TryAdd(Context.ConnectionId, hubUser);
