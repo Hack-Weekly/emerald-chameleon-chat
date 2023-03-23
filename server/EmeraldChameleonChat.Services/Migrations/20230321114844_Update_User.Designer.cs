@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EmeraldChameleonChat.Services.Migrations
 {
     [DbContext(typeof(EmeraldChameleonChatContext))]
-    [Migration("20230317163942_Add-UsersTable")]
-    partial class AddUsersTable
+    [Migration("20230321114844_Update_User")]
+    partial class Update_User
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -30,15 +30,12 @@ namespace EmeraldChameleonChat.Services.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Mobile")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Password")

@@ -3,6 +3,7 @@ using System;
 using EmeraldChameleonChat.Services.DAL.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EmeraldChameleonChat.Services.Migrations
 {
     [DbContext(typeof(EmeraldChameleonChatContext))]
-    partial class EmeraldChameleonChatContextModelSnapshot : ModelSnapshot
+    [Migration("20230320235127_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,19 +43,14 @@ namespace EmeraldChameleonChat.Services.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("longtext");
 
                     b.Property<bool>("isActive")
                         .HasColumnType("tinyint(1)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CreatorId");
-
-                    b.HasIndex("Name")
-                        .IsUnique();
-
-                    b.ToTable("Chatroom", (string)null);
+                    b.ToTable("Chatroom");
                 });
 
             modelBuilder.Entity("EmeraldChameleonChat.Services.Model.Entity.ChatRoomMessage", b =>
@@ -80,7 +78,7 @@ namespace EmeraldChameleonChat.Services.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ChatRoomMessage", (string)null);
+                    b.ToTable("ChatRoomMessage");
                 });
 
             modelBuilder.Entity("EmeraldChameleonChat.Services.Model.Entity.Users.User", b =>
@@ -123,7 +121,7 @@ namespace EmeraldChameleonChat.Services.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("EmeraldChameleonChat.Services.Model.Entity.WeatherForecast", b =>
@@ -147,18 +145,7 @@ namespace EmeraldChameleonChat.Services.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("WeatherForecast", (string)null);
-                });
-
-            modelBuilder.Entity("EmeraldChameleonChat.Services.Model.Entity.ChatRoom", b =>
-                {
-                    b.HasOne("EmeraldChameleonChat.Services.Model.Entity.Users.User", "User")
-                        .WithMany()
-                        .HasForeignKey("CreatorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
+                    b.ToTable("WeatherForecast");
                 });
 
             modelBuilder.Entity("EmeraldChameleonChat.Services.Model.Entity.ChatRoomMessage", b =>

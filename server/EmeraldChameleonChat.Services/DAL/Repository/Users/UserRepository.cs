@@ -32,5 +32,9 @@ namespace EmeraldChameleonChat.Services.Repository
         {
             return await _context.Users.FirstOrDefaultAsync(x => x.Email.ToUpper().Equals(email.ToUpper()));
         }
+        public async Task<User> GetUserById(Guid userId)
+        {
+            return await _context.Users.FirstOrDefaultAsync(x => x.Id.Equals(userId));
+        }
     }
 }

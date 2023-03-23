@@ -24,7 +24,7 @@ namespace EmeraldChameleonChat.Controllers
 
 
         [HttpPost(Name = "Login")]
-        public async Task<ActionResult<LoginResponseDTO>> Login([FromForm] LoginDTO loginDTO, CancellationToken cancellationToken)
+        public async Task<ActionResult<LoginResponseDTO>> Login([FromBody] LoginDTO loginDTO, CancellationToken cancellationToken)
         {
             if (loginDTO == null) return BadRequest("Please fill the required data");
             if (loginDTO.Password == null) return BadRequest("Password is Required");
@@ -40,14 +40,15 @@ namespace EmeraldChameleonChat.Controllers
         }
 
         [HttpPost(Name = "Register")]
-        public async Task<ActionResult<LoginResponseDTO>> Register([FromForm] RegisterDTO registeredUser, CancellationToken cancellationToken)
+        public async Task<ActionResult<LoginResponseDTO>> Register([FromBody] RegisterDTO registeredUser)
         {
             if (registeredUser == null) return BadRequest("Please fill the required data");
             if (registeredUser.Username == null) return BadRequest("Username is Required");
-            if (registeredUser.Email == null) return BadRequest("Email is Required");
+            //if (registeredUser.Email == null) return BadRequest("Email is Required");
             if (registeredUser.Password == null) return BadRequest("Password is Required");
 
 
+            CancellationToken cancellationToken = new();
             var token = await _userService.RegisterUser(registeredUser, cancellationToken);
             return Ok(token);
         }
