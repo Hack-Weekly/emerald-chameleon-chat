@@ -3,10 +3,15 @@
 .startContainer {
     width: 80%;
     margin-top: 1.5rem;
+    text-align: center;
 
-    .slider {
+    a {
+        text-decoration: none;
+    }
+
+    .loginLink {
         width: 100%;
-        max-width: 350px;
+        max-width: 300px;
         height: 3rem;
         margin: 0 auto;
         display: flex;
@@ -20,20 +25,27 @@
         border: 1px solid v.$neutral-700;
         box-shadow: 5px 5px 10px v.$neutral-300;
         border-radius: 35px;
-
+        
+       
         img {
             background-color: v.$primary-light;
             border-radius: 50%;
         }
     }
 
-    .links {
+    .loginLink:hover {
+        box-shadow: 5px 5px 15px v.$neutral-700;
+    }
+
+    .registerLink {
         color: v.$secondary;
-        text-align: center;
-        display: flex;
-        justify-content: center;
-        gap: 2rem;
+        display: inline-block;
         margin-top: 1.2rem;
-        font-size: v.$font-size-sm * 1.2;
+        font-size: v.$base-font-size;
+        padding: 1rem;
+    }
+
+    .registerLink:hover {
+        font-weight: bold;
     }
 }
