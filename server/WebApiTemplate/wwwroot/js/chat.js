@@ -43,3 +43,19 @@ document.getElementById("newRoomButton").addEventListener("click", function (eve
     });
     event.preventDefault();
 });
+
+document.getElementById("joinRoomButton").addEventListener("click", function (event) {
+    var roomName = document.getElementById("joinRoomInput").value;
+    connection.invoke("JoinRoom", roomName).catch(function (err) {
+        return console.error(err.toString());
+    });
+    event.preventDefault();
+});
+
+document.getElementById("leaveRoomButton").addEventListener("click", function (event) {
+    var roomName = document.getElementById("joinRoomInput").value;
+    connection.invoke("LeaveRoom", roomName).catch(function (err) {
+        return console.error(err.toString());
+    });
+    event.preventDefault();
+});
