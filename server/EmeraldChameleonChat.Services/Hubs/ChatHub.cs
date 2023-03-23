@@ -89,10 +89,11 @@ namespace EmeraldChameleonChat.Hubs
         }
 
         //Get all active chatrooms
-        public async Task GetActiveChatRooms()
+        public async Task<IEnumerable<string>> GetActiveChatRooms()
         {
-            var response = _chatMessageRepository.GetActiveGroups();
-            await response.ConfigureAwait(true);
+            var response = _chatMessageRepository.GetActiveGroups().Result.Select(room => room.Name);
+            await Clients.Caller.SendAsync("activeRoomsMessage", response);
+            return response;
         }
 
         //Join new chatroom

@@ -59,3 +59,20 @@ document.getElementById("leaveRoomButton").addEventListener("click", function (e
     });
     event.preventDefault();
 });
+
+document.getElementById("getActiveRooms").addEventListener("click", function (event) {
+    connection.invoke("GetActiveChatRooms").catch(function (err) {
+        return console.error(err.toString());
+    });
+    event.preventDefault();
+});
+
+connection.on("activeRoomsMessage", function (message) {
+    const list = document.getElementById('activeRooms');
+    list.innerHTML = '';
+    message.forEach(item => {
+        const li = document.createElement('li');
+        li.innerText = item;
+        list.appendChild(li);
+    });
+});
