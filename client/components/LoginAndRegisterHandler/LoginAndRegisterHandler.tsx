@@ -10,7 +10,7 @@ function LoginAndRegisterHandler() {
     <div className={styles.startContainer}>
       <Link href="/login">
         <div className={styles.loginLink}>
-          <span className={styles.loginSpan}>Chat</span>
+          <span className={styles.loginSpan}>Login</span>
           <Image
             priority
             src="/images/right-arrow.svg"
