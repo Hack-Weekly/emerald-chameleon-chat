@@ -46,8 +46,6 @@ namespace EmeraldChameleonChat.Hubs
             };
             _users.TryAdd(Context.ConnectionId, hubUser);
 
-            await JoinRoom("Dumping Grounds");
-
             return base.OnConnectedAsync();
         }
 
