@@ -3,10 +3,9 @@
 import React, { useState } from 'react'
 import styles from './EmailConfirmation.module.scss'
 import Link from 'next/link'
-
+import { useSearchParams } from 'next/navigation'
 
 function EmailConfirmation() {
-  console.log('Email Confirmed rendered')
   const [showForm, setShowForm] = useState(true)
   const [responseMessage, setResponseMessage] = useState('')
   const [showSuccessOrFailureMessage, setShowSuccessOrFailureMessage] =
@@ -50,10 +49,13 @@ function EmailConfirmation() {
     )
   }
 
-  const ConfirmationCodeForm = () => {
+  const ConfirmEmail = () => {
     // const [confirmationCodeInput, setConfirmationCodeInput] = useState('')
 
-    const handleClick = (e: any) => {
+    const searchParams= useSearchParams()
+    const confirmationCode = searchParams?.get('keys')
+
+    const handleClick = async (e: any) => {
       console.log(e.target.value)
 
       // <<<<<<<<<<<<<<<<
@@ -68,18 +70,18 @@ function EmailConfirmation() {
       // >>>>>>>>>>>>>>>>>
 
       // send http request to the backend confirmation url
-      // const baseUrl = '/api/Users/Confirmation'
-      // const options = {
-      //   method: 'GET',
-      //   headers: {}
-      // }
-      // try {
-      //   const response = await fetch(baseUrl, options)
-      //   const data = await response.json()
-      //
-      // } catch (error) {
-      //   console.log(error)
-      // }
+      try {
+        const response = await fetch('api/Users/Confirmation/${confirmationCode}')
+        // const data = await response.json()
+
+        if (!response.ok) {
+          // setResponseMessage('failure')
+        } else {
+          // setResponseMessage('success')
+        }
+      } catch (error) {
+        console.log(error)
+      }
     }
     return (
       <div className={styles.messageBoxWrapper}>
@@ -131,9 +133,11 @@ function EmailConfirmation() {
   return (
     <div className={styles.pageWrapper}>
       <h1>Email Confirmation</h1>
-      {showForm && <ConfirmationCodeForm />}
+      {showForm && <ConfirmEmail />}
       {showSuccessOrFailureMessage && <SuccessOrFailureHandler />}
-      <Link className={styles.homeLink} href="/">Back to Home</Link>
+      <Link className={styles.homeLink} href="/">
+        Back to Home
+      </Link>
     </div>
   )
 }
