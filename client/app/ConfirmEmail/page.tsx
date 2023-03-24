@@ -3,48 +3,50 @@
 import React, { useState } from 'react'
 import styles from './EmailConfirmation.module.scss'
 import Link from 'next/link'
-import { useSearchParams } from 'next/navigation'
+// import { useSearchParams } from 'next/navigation'
 
 function EmailConfirmation() {
   const [showForm, setShowForm] = useState(true)
-  const [responseMessage, setResponseMessage] = useState('')
   const [showSuccessOrFailureMessage, setShowSuccessOrFailureMessage] =
     useState(false)
+  const [isResponseOk, setIsResponseOk] = useState(false)
+  const [isOtherError, setIsOtherError] = useState(false)
 
-  function SuccessOrFailureHandler() {
-    let message = ''
-    let buttonText = ''
-    let hrefText = ''
-    let isSuccess = false
-    if (responseMessage === 'success') {
-      message = 'Your email has been confirmed!'
-      buttonText = 'Login'
-      hrefText = '/login'
-      isSuccess = true
-    } else if (responseMessage === 'failure') {
-      message = 'Oops! Your email could not be confirmed.'
-      buttonText = 'Try Again'
-      isSuccess = false
-    }
+  function SuccessResponse() {
+    const message = 'Your email has been confirmed!'
+    const buttonText = 'Login'
+    const hrefText = '/login'
+
+    return (
+      <div className={styles.messageBoxWrapper}>
+        <h3>{message}</h3>
+        <Link href={hrefText} className={styles.messageBox__link}>
+          {buttonText}
+        </Link>
+      </div>
+    )
+  }
+
+  function ErrorResponse() {
+    const message = 'Oops! Your email could not be confirmed.'
+    const buttonText = 'Try Again'
+    setIsResponseOk(false)
 
     const handleTryAgainClick = () => {
       setShowSuccessOrFailureMessage(false)
+      setIsOtherError(false)
       setShowForm(true)
     }
 
     return (
       <div className={styles.messageBoxWrapper}>
         <h3>{message}</h3>
-        {isSuccess && (
-          <Link href={hrefText} className={styles.messageBox__link}>
-            {buttonText}
-          </Link>
+        {isOtherError && (
+          <p className={styles.errorMessage}>There was a connection issue.</p>
         )}
-        {!isSuccess && (
-          <button className={styles.messageBox__link} onClick={handleTryAgainClick}>
-            {buttonText}
-          </button>
-        )}
+        <button className={styles.messageBox__link} onClick={handleTryAgainClick}>
+          {buttonText}
+        </button>
       </div>
     )
   }
@@ -52,37 +54,38 @@ function EmailConfirmation() {
   const ConfirmEmail = () => {
     // const [confirmationCodeInput, setConfirmationCodeInput] = useState('')
 
-    const searchParams= useSearchParams()
-    const confirmationCode = searchParams?.get('keys')
+    // TEST URL
+    // https://nas.lightshowdepot.com/api/Users/EmailConfirmation?confirmationCode=vm7cFZbXx6%26%26K%21q&userName=TestUser
 
-    const handleClick = async (e: any) => {
-      console.log(e.target.value)
+    const baseUrl = 'https://nas.lightshowdepot.com/'
+    const emailConfirmationEndpoint = 'api/Users/EmailConfirmation/'
+    // const searchParams = useSearchParams()
+    // const confirmationCode = searchParams?.get('confirmationCode')
+    // const userName = searchParams?.get('userName')
+    const testConfirmationCode = 'vm7cFZbXx6%26%26K%21q'
+    const testUserName = 'TestUser'
+    const httpRequestURL = `${baseUrl}${emailConfirmationEndpoint}?confirmationCode=${testConfirmationCode}&userName=${testUserName}`
 
-      // <<<<<<<<<<<<<<<<
-      // for testing UI until actual http request is set up
-      if (e.target.value === '123') {
-        setResponseMessage('success')
-      } else {
-        setResponseMessage('failure')
-      }
-      setShowForm(false)
-      setShowSuccessOrFailureMessage(true)
-      // >>>>>>>>>>>>>>>>>
-
-      // send http request to the backend confirmation url
+    const handleClick = async () => {
       try {
-        const response = await fetch('api/Users/Confirmation/${confirmationCode}')
-        // const data = await response.json()
+        const response = await fetch(httpRequestURL)
 
-        if (!response.ok) {
-          // setResponseMessage('failure')
-        } else {
-          // setResponseMessage('success')
+        if (response.status === 200) {
+          setIsResponseOk(true)
+        } else if (response.status === 400) {
+          setIsResponseOk(false)
+        } else if (response.status === 404) {
+          setIsResponseOk(false)
+          setIsOtherError(true)
         }
       } catch (error) {
         console.log(error)
       }
+
+      setShowForm(false)
+      setShowSuccessOrFailureMessage(true)
     }
+
     return (
       <div className={styles.messageBoxWrapper}>
         <h3>Click to confirm your email.</h3>
@@ -93,16 +96,6 @@ function EmailConfirmation() {
         >
           Confirm Email
         </button>
-        {/* These Buttons are just for testing */}
-        <h4>Buttons for testing UI - to be removed</h4>
-        <div>
-          <button onClick={handleClick} value="123">
-            Test success
-          </button>
-          <button onClick={handleClick} value="456">
-            Test failure
-          </button>
-        </div>
 
         {/* This is if user is supposed to enter a code */}
         {/* <div className={styles.instructions}>
@@ -116,7 +109,7 @@ function EmailConfirmation() {
             type="text"
             id="confirmationCode"
             name="confirmationCode"
-            value={confirmationCodeInput}
+            value={confirmationCode}
             onChange={(e) => setConfirmationCodeInput(e.currentTarget.value)}
           />
           <p>Please enter your code</p>
@@ -134,7 +127,8 @@ function EmailConfirmation() {
     <div className={styles.pageWrapper}>
       <h1>Email Confirmation</h1>
       {showForm && <ConfirmEmail />}
-      {showSuccessOrFailureMessage && <SuccessOrFailureHandler />}
+      {showSuccessOrFailureMessage &&
+        (isResponseOk ? <SuccessResponse /> : <ErrorResponse />)}
       <Link className={styles.homeLink} href="/">
         Back to Home
       </Link>

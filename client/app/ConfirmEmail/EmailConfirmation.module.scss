@@ -94,6 +94,11 @@
         margin: 2rem auto 0 auto;
         color: v.$neutral-100;
         text-decoration: none;
+        font-size: v.$base-font-size;
+
+        &:hover {
+            box-shadow: 3px 3px 10px v.$neutral-700;
+        }
     }
 
     button {
@@ -102,3 +107,8 @@
     }
 }
 
+.errorMessage {
+    font-weight: bold;
+    color: v.$neutral-700;
+    padding: 0.5rem 1rem;
+}
