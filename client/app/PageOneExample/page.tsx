@@ -1,3 +1,5 @@
+import AvailableChatRooms from '@components/AvailableChatRooms/AvailableChatRooms'
+
 const PageOneExample = () => {
   const h1Text =
     "This is a server rendered page, because it doesn't have 'use client' this file"
@@ -5,6 +7,7 @@ const PageOneExample = () => {
     <div>
       <h1 className="h1">This is the /PageOneExample route</h1>
       <h1>{h1Text}</h1>
+      <AvailableChatRooms />
     </div>
   )
 }

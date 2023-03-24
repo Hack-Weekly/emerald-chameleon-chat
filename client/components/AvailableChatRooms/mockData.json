@@ -1,0 +1,17 @@
+[
+    {
+        "name": "Food",
+        "id": 1,
+        "description": "Everything food. Yummm!"
+    },
+    {
+        "name": "Cats",
+        "id": 2,
+        "description": "Everything cats!!!"
+    },
+    {
+        "name": "Games",
+        "id": 3,
+        "description": "From VR to Board Games"
+    }
+]
