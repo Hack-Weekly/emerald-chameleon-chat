@@ -54,21 +54,20 @@ function EmailConfirmation() {
   const ConfirmEmail = () => {
     // const [confirmationCodeInput, setConfirmationCodeInput] = useState('')
 
-    // TEST URL
+    // SAMPLE EMAlL CONFIRMATION
     // https://nas.lightshowdepot.com/api/Users/EmailConfirmation?confirmationCode=vm7cFZbXx6%26%26K%21q&userName=TestUser
 
-    const baseUrl = 'https://nas.lightshowdepot.com/'
-    const emailConfirmationEndpoint = 'api/Users/EmailConfirmation/'
+    const url = `${process.env.NEXT_PUBLIC_API_URL}/Users/EmailConfirmation/`
     // const searchParams = useSearchParams()
     // const confirmationCode = searchParams?.get('confirmationCode')
     // const userName = searchParams?.get('userName')
     const testConfirmationCode = 'vm7cFZbXx6%26%26K%21q'
     const testUserName = 'TestUser'
-    const httpRequestURL = `${baseUrl}${emailConfirmationEndpoint}?confirmationCode=${testConfirmationCode}&userName=${testUserName}`
+    const httpRequestQueryString = `${url}?confirmationCode=${testConfirmationCode}&userName=${testUserName}`
 
     const handleClick = async () => {
       try {
-        const response = await fetch(httpRequestURL)
+        const response = await fetch(httpRequestQueryString)
 
         if (response.status === 200) {
           setIsResponseOk(true)
