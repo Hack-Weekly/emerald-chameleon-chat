@@ -6,7 +6,8 @@ const PageOneExample = () => {
   return (
     <div>
       <h1 className="h1">This is the /PageOneExample route</h1>
-      <h1>{h1Text}</h1>
+      <h2>{h1Text}</h2>
+      <hr />
       <AvailableChatRooms />
     </div>
   )

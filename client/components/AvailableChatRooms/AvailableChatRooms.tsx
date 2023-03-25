@@ -2,9 +2,11 @@ import React from 'react'
 import styles from './AvailableChatRooms.module.scss'
 import chatRooms from './mockData.json'
 import Link from 'next/link'
+import type { ChatRoom } from 'types/data'
+
+type chatRooms = ChatRoom[]
 
 function AvailableChatRooms() {
- 
   return (
     <div className={styles.wrapper}>
       <h2>Available Chat Rooms</h2>
@@ -26,18 +28,22 @@ function ChatRoomList() {
   // fetch list of chat rooms
   // set chatRooms = data.json()
 
+  console.log(chatRooms)
   return (
     <ul>
-      {chatRooms.map((room, index) => (
-        <li key={index}>
-          <Link href={`/chat-room/${room.id}`}>
-            <div className={styles.roomInfo}>
-              <h3>{room.name}</h3>
-              <p>{room.description}</p>
-            </div>
-          </Link>
-        </li>
-      ))}
+      {chatRooms.map(
+        (room) =>
+          room.isActive && (
+            <li key={room.creatorId}>
+              <Link href={`/chat-room/${room.creatorId}`}>
+                <div className={styles.roomInfo}>
+                  <h3>{room.name}</h3>
+                  <p>{room.description}</p>
+                </div>
+              </Link>
+            </li>
+          )
+      )}
     </ul>
   )
 }

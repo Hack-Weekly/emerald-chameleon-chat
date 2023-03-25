@@ -31,7 +31,9 @@
         ul {
             list-style-type: none;
             padding: 1rem;
-            
+            max-height: 350px;
+            overflow: scroll;
+            margin: 1rem 0;
     
             li {
                 border-bottom: 1px solid v.$primary-dark;
@@ -44,21 +46,23 @@
             .roomInfo {
                 font-size: v.$base-font-size;
                 padding: 1rem;
+                background-color: v.$neutral-200;
                 
                 &:hover {
-                    background-color: v.$neutral-200;
+                    background-color: v.$neutral-300;
                 }
             }
         }
 
         .createChatLink {
-            color: v.$primary-dark;
+            color: v.$neutral-100;
             border: 2px solid v.$primary-dark;
             border-radius: 10px;
             padding: 0.5rem 1rem;
+            background-color: v.$primary-dark;
 
             &:hover {
-                background-color: v.$neutral-200;
+                background-color: v.$primary-light;
             }
         }
     }
