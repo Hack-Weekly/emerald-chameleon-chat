@@ -1,80 +1,16 @@
-'use client'
-import {
-  Register,
-  SaveTokenToLocalStorage,
-} from 'services/authentication/authentication.service'
-import { useEffect, useState } from 'react'
-import {
-  RegisterDTO,
-  UserDTO,
-} from 'services/authentication/types/authentication.type'
-import { useRouter } from 'next/navigation'
-import useUser from 'hooks/useUser'
+import RegisterForm from '@components/LoginAndRegisterHandler/Register/RegisterForm'
+import ChameleonGraphic from '@components/ChameleonGraphic/ChameleonGraphic'
+import IntroText from '@components/IntroText/IntroText'
+import styles from '@styles/Register.module.scss'
 
-const PageOneExample = () => {
-  const [userDTO, setUserDTO] = useState<RegisterDTO>({
-    name: '',
-    email: '',
-    username: '',
-    password: '',
-  })
-
-  const handleSubmit = async (e: any) => {
-    e.preventDefault()
-    const tokens = await Register(userDTO)
-    SaveTokenToLocalStorage(tokens)
-  }
-
-  const handleChange = (e: any) => {
-    setUserDTO({ ...userDTO, [e.target.name]: e.target.value })
-  }
-
-  const loggedInUser: UserDTO = useUser()
-  const router = useRouter()
-  useEffect(() => {
-    if (loggedInUser && loggedInUser.username) {
-      router.push('/profile')
-    }
-  })
-
+const Register = () => {
   return (
-    <div>
-      <h1>Register</h1>
-      <form onSubmit={(e) => handleSubmit(e)}>
-        <input
-          type="text"
-          name="username"
-          placeholder="Username"
-          onChange={(e) => handleChange(e)}
-        />
-        <input
-          type="text"
-          name="password"
-          placeholder="Password"
-          onChange={(e) => handleChange(e)}
-        />
-        <input
-          type="text"
-          name="email"
-          placeholder="Email"
-          onChange={(e) => handleChange(e)}
-        />
-        <input
-          type="text"
-          name="mobile"
-          placeholder="Mobile"
-          onChange={(e) => handleChange(e)}
-        />
-        <input
-          type="text"
-          name="name"
-          placeholder="Name"
-          onChange={(e) => handleChange(e)}
-        />
-        <button type="submit">Submit</button>
-      </form>
+    <div className={styles.pageLayout}>
+      <ChameleonGraphic />
+      <IntroText />
+      <RegisterForm />
     </div>
   )
 }
 
-export default PageOneExample
+export default Register

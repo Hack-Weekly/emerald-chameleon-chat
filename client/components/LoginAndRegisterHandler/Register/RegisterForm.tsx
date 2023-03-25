@@ -1,55 +1,38 @@
 'use client'
 import {
-  Login,
+  Register,
   SaveTokenToLocalStorage,
 } from 'services/authentication/authentication.service'
 import { useEffect, useState } from 'react'
-import { LoginDTO, UserDTO } from 'services/authentication/types/authentication.type'
-import useUser from 'hooks/useUser'
+import {
+  RegisterDTO,
+  UserDTO,
+} from 'services/authentication/types/authentication.type'
 import { useRouter } from 'next/navigation'
-import styles from './LoginForm.module.scss'
+import useUser from 'hooks/useUser'
+import styles from './RegisterForm.module.scss'
 import Link from 'next/link'
 
-const LoginForm = () => {
-  const [userDTO, setUserDTO] = useState<LoginDTO>({
+const RegisterForm = () => {
+  const [userDTO, setUserDTO] = useState<RegisterDTO>({
+    name: '',
     email: '',
     username: '',
     password: '',
   })
 
-  const loggedInUser: UserDTO = useUser()
-  const router = useRouter()
-
   const handleSubmit = async (e: any) => {
     e.preventDefault()
-    const tokens = await Login(userDTO)
+    const tokens = await Register(userDTO)
     SaveTokenToLocalStorage(tokens)
-
-    try {
-      const res = await fetch('api/login', {
-        method: 'POST',
-        body: JSON.stringify(userDTO),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-      const data = await res.json()
-
-      if (res.ok) {
-        // redirect to chatrooms screen after login
-        router.push('/chatrooms')
-      } else {
-        alert(data.message)
-      }
-    } catch (error) {
-      console.log(error)
-    }
   }
 
   const handleChange = (e: any) => {
     setUserDTO({ ...userDTO, [e.target.name]: e.target.value })
   }
 
+  const loggedInUser: UserDTO = useUser()
+  const router = useRouter()
   useEffect(() => {
     if (loggedInUser && loggedInUser.username) {
       router.push('/profile')
@@ -57,37 +40,39 @@ const LoginForm = () => {
   })
 
   return (
-    <div  className={styles.componentWrapper}>
-      <h2 className={styles.title}>Welcome Back!</h2>
+    <div className={styles.componentWrapper}>
+      <h2 className={styles.title}>Create an Account</h2>
       <form className={styles.formWrapper} onSubmit={(e) => handleSubmit(e)}>
         <input
           type="text"
           name="username"
           placeholder="Username"
-          required
           onChange={(e) => handleChange(e)}
         />
         <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          required
-          onChange={(e) => handleChange(e)}
-        />
-        <input
-          type="password"
+          type="text"
           name="password"
           placeholder="Password"
-          required
+          onChange={(e) => handleChange(e)}
+        />
+        <input
+          type="text"
+          name="email"
+          placeholder="Email"
+          onChange={(e) => handleChange(e)}
+        />
+        <input
+          type="text"
+          name="name"
+          placeholder="Name"
           onChange={(e) => handleChange(e)}
         />
         <div className={styles.buttonContainer}>
           <Link href="/" className={styles.cancelButton}>
             Cancel
           </Link>
-
-          <button className={styles.loginButton} type="submit">
-            Login
+          <button className={styles.submitButton} type="submit">
+            Submit
           </button>
         </div>
       </form>
@@ -95,4 +80,4 @@ const LoginForm = () => {
   )
 }
 
-export default LoginForm
+export default RegisterForm

@@ -7,8 +7,8 @@ function ChameleonGraphic() {
       priority
       src="/images/chameleon.svg"
       alt="Chameleon Logo"
-      width={120}
-      height={120}
+      width={100}
+      height={100}
     />
   )
 }
