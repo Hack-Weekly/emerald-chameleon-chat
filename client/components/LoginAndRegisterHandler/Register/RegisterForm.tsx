@@ -13,31 +13,35 @@ import useUser from 'hooks/useUser'
 import styles from './RegisterForm.module.scss'
 import Link from 'next/link'
 
+
 const RegisterForm = () => {
   const [userDTO, setUserDTO] = useState<RegisterDTO>({
     name: '',
     email: '',
     username: '',
     password: '',
+    mobile: '',
   })
 
   const handleSubmit = async (e: any) => {
     e.preventDefault()
     const tokens = await Register(userDTO)
     SaveTokenToLocalStorage(tokens)
+    e.target.reset()
   }
 
   const handleChange = (e: any) => {
     setUserDTO({ ...userDTO, [e.target.name]: e.target.value })
   }
 
-  const loggedInUser: UserDTO = useUser()
-  const router = useRouter()
-  useEffect(() => {
-    if (loggedInUser && loggedInUser.username) {
-      router.push('/profile')
-    }
-  })
+  // this automatically takes user to profile page upon registraion - commented out for testing
+  // const loggedInUser: UserDTO = useUser()
+  // const router = useRouter()
+  // useEffect(() => {
+  //   if (loggedInUser && loggedInUser.username) {
+  //     router.push('/profile')
+  //   }
+  // })
 
   return (
     <div className={styles.componentWrapper}>
@@ -65,6 +69,12 @@ const RegisterForm = () => {
           type="text"
           name="name"
           placeholder="Name"
+          onChange={(e) => handleChange(e)}
+        />
+        <input
+          type="text"
+          name="mobile"
+          placeholder="mobile"
           onChange={(e) => handleChange(e)}
         />
         <div className={styles.buttonContainer}>
