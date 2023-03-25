@@ -2,7 +2,7 @@
     {
         "name": "Food",
         "id": 1,
-        "description": "Everything food. Yummm!"
+        "description": "Food, recipes, cooking tips.... Yummm!"
     },
     {
         "name": "Cats",
@@ -13,5 +13,10 @@
         "name": "Games",
         "id": 3,
         "description": "From VR to Board Games"
+    },
+    {
+        "name": "Books",
+        "id": 4,
+        "description": "All genres welcome."
     }
 ]
