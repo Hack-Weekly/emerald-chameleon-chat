@@ -28,7 +28,6 @@ function ChatRoomList() {
   // fetch list of chat rooms
   // set chatRooms = data.json()
 
-  console.log(chatRooms)
   return (
     <ul>
       {chatRooms.map(
