@@ -15,6 +15,7 @@ import Link from 'next/link'
 
 
 const RegisterForm = () => {
+  // const [showForm, setShowForm] = useState(true)
   const [userDTO, setUserDTO] = useState<RegisterDTO>({
     name: '',
     email: '',
@@ -27,7 +28,9 @@ const RegisterForm = () => {
     e.preventDefault()
     const tokens = await Register(userDTO)
     SaveTokenToLocalStorage(tokens)
+
     e.target.reset()
+    // setShowForm(false)
   }
 
   const handleChange = (e: any) => {
@@ -45,47 +48,55 @@ const RegisterForm = () => {
 
   return (
     <div className={styles.componentWrapper}>
-      <h2 className={styles.title}>Create an Account</h2>
-      <form className={styles.formWrapper} onSubmit={(e) => handleSubmit(e)}>
-        <input
-          type="text"
-          name="username"
-          placeholder="Username"
-          onChange={(e) => handleChange(e)}
-        />
-        <input
-          type="text"
-          name="password"
-          placeholder="Password"
-          onChange={(e) => handleChange(e)}
-        />
-        <input
-          type="text"
-          name="email"
-          placeholder="Email"
-          onChange={(e) => handleChange(e)}
-        />
-        <input
-          type="text"
-          name="name"
-          placeholder="Name"
-          onChange={(e) => handleChange(e)}
-        />
-        <input
-          type="text"
-          name="mobile"
-          placeholder="mobile"
-          onChange={(e) => handleChange(e)}
-        />
-        <div className={styles.buttonContainer}>
-          <Link href="/" className={styles.cancelButton}>
-            Cancel
-          </Link>
-          <button className={styles.submitButton} type="submit">
-            Submit
-          </button>
-        </div>
-      </form>
+      {/* {showForm &&  */}
+        <form className={styles.formWrapper} onSubmit={(e) => handleSubmit(e)}>
+          <h2 className={styles.title}>Create an Account</h2>
+          <input
+            type="text"
+            name="username"
+            placeholder="Username"
+            onChange={(e) => handleChange(e)}
+          />
+          <input
+            type="text"
+            name="password"
+            placeholder="Password"
+            onChange={(e) => handleChange(e)}
+          />
+          <input
+            type="text"
+            name="email"
+            placeholder="Email"
+            onChange={(e) => handleChange(e)}
+          />
+          <input
+            type="text"
+            name="name"
+            placeholder="Name"
+            onChange={(e) => handleChange(e)}
+          />
+          <input
+            type="text"
+            name="mobile"
+            placeholder="mobile"
+            onChange={(e) => handleChange(e)}
+          />
+          <div className={styles.buttonContainer}>
+            <Link href="/" className={styles.cancelButton}>
+              Cancel
+            </Link>
+            <button className={styles.submitButton} type="submit">
+              Submit
+            </button>
+          </div>
+        </form>
+        {/* } */}
+      {/* {!showForm && (
+        <div>
+          <h3>Account Created!</h3>
+          <Link href="/login">Login</Link>
+        </div> */}
+      {/* )} */}
     </div>
   )
 }
