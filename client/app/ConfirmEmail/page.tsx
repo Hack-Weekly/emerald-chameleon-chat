@@ -54,14 +54,11 @@ function EmailConfirmation() {
   const ConfirmEmail = () => {
     // const [confirmationCodeInput, setConfirmationCodeInput] = useState('')
 
-    // SAMPLE EMAlL CONFIRMATION
-    // https://nas.lightshowdepot.com/api/Users/EmailConfirmation?confirmationCode=vm7cFZbXx6%26%26K%21q&userName=TestUser
-
     const url = `${process.env.NEXT_PUBLIC_API_URL}/Users/EmailConfirmation/`
     // const searchParams = useSearchParams()
     // const confirmationCode = searchParams?.get('confirmationCode')
     // const userName = searchParams?.get('userName')
-    const testConfirmationCode = 'vm7cFZbXx6%26%26K%21q'
+    const testConfirmationCode = process.env.TEST_CONFIRMATION_CODE
     const testUserName = 'TestUser'
     const httpRequestQueryString = `${url}?confirmationCode=${testConfirmationCode}&userName=${testUserName}`
 
