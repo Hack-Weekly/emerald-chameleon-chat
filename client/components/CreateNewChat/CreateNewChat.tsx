@@ -39,7 +39,6 @@ export default function CreateNewChat() {
       const data = await res.json()
 
       if (res.ok) {
-        // redirect to chatrooms screen after login
         router.push('/chatrooms')
       } else {
         alert(data.message)
@@ -51,9 +50,8 @@ export default function CreateNewChat() {
 
   return (
     <div className={styles.wrapper}>
-      {/** /chatroom doesn't exist yet */}
       <div className={styles.titleWrapper}>
-        <Link href="/chatrooms">&#x25c4; Back</Link>
+        <Link href="/chat-room">&#x25c4; Back</Link>
         <h2 className={styles.title}>New Chat</h2>
       </div>
       <form onSubmit={handleSubmit}>
