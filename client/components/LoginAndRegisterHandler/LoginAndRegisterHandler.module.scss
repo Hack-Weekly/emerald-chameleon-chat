@@ -2,7 +2,6 @@
 
 .startContainer {
     width: 80%;
-    margin-top: 1.5rem;
     text-align: center;
 
     a {
@@ -11,15 +10,14 @@
 
     .loginLink {
         width: 100%;
-        max-width: 300px;
+        max-width: 200px;
         height: 3rem;
         margin: 0 auto;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        font-size: v.$font-size-xl;
-        padding: 2rem;
-        padding-right: 0;
+        font-size: v.$font-size-lg;
+        padding-left: 1rem;
         color: v.$neutral-700;
         background-color: v.$neutral-100;
         border: 1px solid v.$neutral-700;
@@ -27,7 +25,7 @@
         border-radius: 35px;
         transition: all 300ms ease-in-out;
         
-       
+
         img {
             background-color: v.$primary-light;
             border-radius: 50%;
@@ -41,7 +39,7 @@
     .registerLink {
         color: v.$secondary;
         display: inline-block;
-        margin-top: 1.2rem;
+        margin-top: 1rem;
         font-size: v.$base-font-size;
         padding: 1rem;
         transition: all 300ms ease-in-out;

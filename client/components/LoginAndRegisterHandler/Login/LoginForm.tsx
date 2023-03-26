@@ -24,26 +24,6 @@ const LoginForm = () => {
     e.preventDefault()
     const tokens = await Login(userDTO)
     SaveTokenToLocalStorage(tokens)
-
-    try {
-      const res = await fetch('api/login', {
-        method: 'POST',
-        body: JSON.stringify(userDTO),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-      const data = await res.json()
-
-      if (res.ok) {
-        // redirect to chatrooms screen after login
-        router.push('/chatrooms')
-      } else {
-        alert(data.message)
-      }
-    } catch (error) {
-      console.log(error)
-    }
   }
 
   const handleChange = (e: any) => {
@@ -52,7 +32,7 @@ const LoginForm = () => {
 
   useEffect(() => {
     if (loggedInUser && loggedInUser.username) {
-      router.push('/profile')
+      router.push('/chat-room')
     }
   })
 
