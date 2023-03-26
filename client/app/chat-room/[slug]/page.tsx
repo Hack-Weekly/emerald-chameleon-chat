@@ -1,4 +1,5 @@
 // This is a server only page. Must import client components to use hooks.
+import AvailableChatRooms from '@components/AvailableChatRooms/AvailableChatRooms'
 import ChatRoomExample from '@components/ChatRoomExample/ChatRoomExample'
 
 export interface Props {
@@ -14,6 +15,8 @@ export default async function ChatRoomSlug(props: Props) {
     <div>
       <h1>Welcome to page ${params.page}</h1>
       <ChatRoomExample page={params.page} />
+
+      <AvailableChatRooms />
     </div>
   )
 }
