@@ -39,7 +39,7 @@ export default function CreateNewChat() {
       const data = await res.json()
 
       if (res.ok) {
-        router.push('/chatrooms')
+        router.push('/chat-room')
       } else {
         alert(data.message)
       }
