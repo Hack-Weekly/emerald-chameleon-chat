@@ -1,4 +1,4 @@
-import CreateNewChat from "@components/CreateNewChat/CreateNewChat"
+import CreateNewChat from '@components/CreateNewChat/CreateNewChat'
 
 const CreateChat = () => {
   return (
