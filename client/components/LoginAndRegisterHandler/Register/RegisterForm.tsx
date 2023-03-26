@@ -13,9 +13,7 @@ import useUser from 'hooks/useUser'
 import styles from './RegisterForm.module.scss'
 import Link from 'next/link'
 
-
 const RegisterForm = () => {
-  // const [showForm, setShowForm] = useState(true)
   const [userDTO, setUserDTO] = useState<RegisterDTO>({
     name: '',
     email: '',
@@ -30,7 +28,6 @@ const RegisterForm = () => {
     SaveTokenToLocalStorage(tokens)
 
     e.target.reset()
-    // setShowForm(false)
   }
 
   const handleChange = (e: any) => {
@@ -47,7 +44,6 @@ const RegisterForm = () => {
 
   return (
     <div className={styles.componentWrapper}>
-      {/* {showForm &&  */}
       <form className={styles.formWrapper} onSubmit={(e) => handleSubmit(e)}>
         <h2 className={styles.title}>Create an Account</h2>
         <input
