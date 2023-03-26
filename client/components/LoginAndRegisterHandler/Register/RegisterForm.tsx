@@ -10,6 +10,8 @@ import {
 } from 'services/authentication/types/authentication.type'
 import { useRouter } from 'next/navigation'
 import useUser from 'hooks/useUser'
+import styles from './RegisterForm.module.scss'
+import Link from 'next/link'
 
 const RegisterForm = () => {
   const [userDTO, setUserDTO] = useState<RegisterDTO>({
@@ -17,12 +19,15 @@ const RegisterForm = () => {
     email: '',
     username: '',
     password: '',
+    mobile: '',
   })
 
   const handleSubmit = async (e: any) => {
     e.preventDefault()
     const tokens = await Register(userDTO)
     SaveTokenToLocalStorage(tokens)
+
+    e.target.reset()
   }
 
   const handleChange = (e: any) => {
@@ -38,9 +43,9 @@ const RegisterForm = () => {
   })
 
   return (
-    <div>
-      <h1>Register</h1>
-      <form onSubmit={(e) => handleSubmit(e)}>
+    <div className={styles.componentWrapper}>
+      <form className={styles.formWrapper} onSubmit={(e) => handleSubmit(e)}>
+        <h2 className={styles.title}>Create an Account</h2>
         <input
           type="text"
           name="username"
@@ -61,17 +66,24 @@ const RegisterForm = () => {
         />
         <input
           type="text"
-          name="mobile"
-          placeholder="Mobile"
-          onChange={(e) => handleChange(e)}
-        />
-        <input
-          type="text"
           name="name"
           placeholder="Name"
           onChange={(e) => handleChange(e)}
         />
-        <button type="submit">Submit</button>
+        <input
+          type="text"
+          name="mobile"
+          placeholder="mobile"
+          onChange={(e) => handleChange(e)}
+        />
+        <div className={styles.buttonContainer}>
+          <Link href="/" className={styles.cancelButton}>
+            Cancel
+          </Link>
+          <button className={styles.submitButton} type="submit">
+            Submit
+          </button>
+        </div>
       </form>
     </div>
   )
