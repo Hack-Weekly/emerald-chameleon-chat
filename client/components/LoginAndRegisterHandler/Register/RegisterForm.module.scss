@@ -1,0 +1,124 @@
+@use "variables.module.scss" as variables;
+
+.componentWrapper {
+    width: 80%;
+    max-width: 300px;
+}
+
+.formWrapper {
+    padding: 2rem 1rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: .5rem;
+
+    background-color: variables.$neutral-100;
+    border: 1px solid variables.$neutral-500;
+    border-radius: 25px;
+    box-shadow: 0 4px 4px 0 variables.$neutral-300;
+
+    input {
+        width: 90%;
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 4px;
+        background-color: variables.$neutral-300;
+        filter: opacity(0.5);
+
+        &:hover {
+            filter: opacity(1);
+            box-shadow: 0 4px 4px 0 variables.$neutral-300;
+        }
+        &:active, &:focus {
+            outline: none;
+            border-bottom: 2px solid variables.$primary-dark;
+            box-shadow: 0 4px 4px 0 variables.$neutral-300;
+        }
+    }
+
+    a, button {
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        letter-spacing: 1px;
+        text-transform: capitalize;
+        font-size: variables.$base-font-size;
+
+        &:hover {
+            box-shadow: 0 4px 4px 0 variables.$neutral-300;
+        }
+        &:active {
+            box-shadow: none;
+        }
+    }
+
+    a {
+        text-decoration: none;
+        color: variables.$neutral-200;
+        text-align: center;
+    }
+}
+
+.title {
+    margin-bottom: 1rem;
+    text-align: center; 
+    color: variables.$neutral-500;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.cancelButton {
+    background-color: variables.$neutral-500;
+    color: variables.$neutral-200;
+    flex-basis: 45%;
+}
+
+.submitButton {
+    background-color: variables.$primary-dark;
+    color: variables.$neutral-200;
+    flex-basis: 45%;
+
+    &:hover {
+        background-color: variables.$neutral-900;
+    }
+}
+
+@media(min-width: 425px) {
+    .formWrapper {
+        width: 100%;
+    }
+}
+
+@media(min-width: 1024px) {
+    .formWrapper {
+        // width: 60%;
+        // height: 50vh;
+
+        input {
+            padding: 8px;
+        }
+    }
+}
+
+
+@media(min-width: 1440px) {
+    .formWrapper{
+        // width: 50%;
+
+        a, input, button {
+            padding: 16px;
+            font-size: variables.$font-size-xl;
+        }
+    }
+
+    .title {
+        font-size: variables.$font-size-xxl;
+    }
+}

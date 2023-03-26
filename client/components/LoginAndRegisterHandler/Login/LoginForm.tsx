@@ -37,7 +37,7 @@ const LoginForm = () => {
   })
 
   return (
-    <div>
+    <div  className={styles.componentWrapper}>
       <h2 className={styles.title}>Welcome Back!</h2>
       <form className={styles.formWrapper} onSubmit={(e) => handleSubmit(e)}>
         <input
