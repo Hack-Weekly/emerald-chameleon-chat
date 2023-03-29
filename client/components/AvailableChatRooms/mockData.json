@@ -1,0 +1,51 @@
+[
+    {
+        "name": "Food",
+        "description": "Food, recipes, cooking tips.... Yummm!",
+        "createdDate": "March 5, 2023",
+        "updatedDate": "March 15, 2023",
+        "creatorId": 101,
+        "isActive": true
+    },
+    {
+        "name": "Cats",
+        "description": "Everything cats!!!",
+        "createdDate": "Feb 2, 2023",
+        "updatedDate": "March 1, 2023",
+        "creatorId": 102,
+        "isActive": true
+    },
+    {
+        "name": "Games",
+        "description": "From VR to Board Games",
+        "createdDate": "August 20, 2022",
+        "updatedDate": "December 1, 2022",
+        "creatorId": 103,
+        "isActive": true
+    },
+    {
+        "name": "Home Repair",
+        "description": "Duct tape and super glue fixes",
+        "createdDate": "November 11, 2020",
+        "updatedDate": "Feb 19, 2023",
+        "creatorId": 105,
+        "isActive": true
+    },
+    {
+        "name": "Random Quotes",
+        "description": "Share your favorite quotes with others.",
+        "createdDate": "July 30, 2019",
+        "updatedDate": "March 16, 2023",
+        "creatorId": 106,
+        "isActive": true
+    },
+    {
+        "name": "Gardening",
+        "description": "Flowers, herbs and produce",
+        "createdDate": "June 18, 2021",
+        "updatedDate": "March 7, 2023",
+        "creatorId": 107,
+        "isActive": false
+    }
+]
+
