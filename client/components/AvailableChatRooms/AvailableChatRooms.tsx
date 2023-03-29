@@ -7,6 +7,7 @@ import withAuth from 'hooks/WithAuth'
 import { UserDTO } from 'services/authentication/types/authentication.type'
 import { ReadTokensFromLocalStorage } from 'services/authentication/authentication.service'
 import { HubConnectionBuilder, HttpTransportType } from '@microsoft/signalr'
+import CreateNewChat from '@components/CreateNewChat/CreateNewChat'
 
 // type chatRooms = ChatRoom[]
 
@@ -15,7 +16,7 @@ const AvailableChatRooms = (props: { user: UserDTO }) => {
 
   const [chatRooms, setChatRooms] = useState<string[]>([])
   const [showChatRoomList, setShowChatRoomList] = useState(false)
-
+  const [showCreateNewChat, setShowCreateNewChat] =useState(false)
   //first get the HubUrl based on what page we are on
   // const HubUrl = `chatHub`
 
@@ -38,14 +39,19 @@ const AvailableChatRooms = (props: { user: UserDTO }) => {
 
       connection.invoke('GetActiveChatRooms')
       connection.on('activeRoomsMessage', (chatRoomList) => {
-        console.log('chatRoomList: ', chatRoomList)
         setChatRooms([...chatRoomList])
         setShowChatRoomList(true)
+        // setShowCreateNewChat(false)
       })
     } catch (err) {
       console.log(err)
     }
   }
+
+  // const handleCreateNewChatClick = () => {
+  //   setShowChatRoomList(false)
+  //   setShowCreateNewChat(true)
+  // }
 
   const CreateChatRoomList = () => {
     return (
@@ -58,9 +64,15 @@ const AvailableChatRooms = (props: { user: UserDTO }) => {
           ))}
         </ul>
         <div className={styles.buttonContainer}>
-          <Link href="/createChat" className={styles.createChatLink}>
+          <Link href="/createChat" className={styles.createChat}>
             Create Chat Room
           </Link>
+          {/* <button
+            onClick={handleCreateNewChatClick}
+            className={styles.createChatBtn}
+          >
+            Create Chat Room
+          </button> */}
           <button onClick={() => setShowChatRoomList(false)}>Cancel</button>
         </div>
       </div>
@@ -70,11 +82,12 @@ const AvailableChatRooms = (props: { user: UserDTO }) => {
   return (
     <div>
       <div className={styles.wrapper}>
-        {!showChatRoomList &&
+        {!showChatRoomList && !showCreateNewChat &&
           <button onClick={handleGetRooms} className={styles.seeChatRoomsBtn}>
             See Available Rooms
           </button>}
         {showChatRoomList && <CreateChatRoomList />}
+        {/* {showCreateNewChat && <CreateNewChat />} */}
         <Link href="/" className={styles.homeLink}>
           Home
         </Link>

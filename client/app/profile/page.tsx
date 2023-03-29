@@ -9,7 +9,6 @@ const Profile = (props: { user: UserDTO }) => {
   return (
     <div className={styles.pageLayout}>
       <h2>Hi {username}</h2>
-      <h3>Join a chat room to get chatting.</h3>
       <AvailableChatRooms name={username} />
     </div>
   )

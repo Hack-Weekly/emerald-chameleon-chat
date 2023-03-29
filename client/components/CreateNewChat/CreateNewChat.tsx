@@ -40,17 +40,18 @@ export default function CreateNewChat() {
             return ReadTokensFromLocalStorage().accessToken ?? ''
           }
         })
-        .build() 
+        .build()
 
       await connection.start()
       connection.invoke('CreateChatroom', formValues.name, formValues.description)
+
       const connectionArr = Object.entries(connection)
       if (connectionArr[16][1] === 'Connected') {
-        router.push('/chat-room')
+        // router.push('/profile')
       }
     } catch (error) {
       alert('Failed to create new chat, please try again.')
-      router.push('/chat-room')
+      router.push('/profile')
       console.log(error)
     }
   }
@@ -58,7 +59,7 @@ export default function CreateNewChat() {
   return (
     <div className={styles.wrapper}>
       <div className={styles.titleWrapper}>
-        <Link href="/chat-room">&#x25c4; Back</Link>
+        <Link href="/profile">&#x25c4; Back</Link>
         <h2 className={styles.title}>New Chat</h2>
       </div>
       <form onSubmit={handleSubmit}>
