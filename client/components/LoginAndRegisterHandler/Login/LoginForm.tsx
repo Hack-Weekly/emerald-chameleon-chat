@@ -21,7 +21,6 @@ const LoginForm = () => {
   const router = useRouter()
 
   const handleSubmit = async (e: any) => {
-    e.preventDefault()
     const tokens = await Login(userDTO)
     SaveTokenToLocalStorage(tokens)
   }

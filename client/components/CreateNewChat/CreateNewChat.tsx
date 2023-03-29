@@ -47,14 +47,10 @@ export default function CreateNewChat() {
       const connectionArr = Object.entries(connection)
       if (connectionArr[16][1] === 'Connected') {
         router.push('/chat-room')
-      } else {
-        router.push('/chat-room')
-        alert('Failed to create a new Chat')
       }
-
-      console.log(connectionArr)
-
     } catch (error) {
+      alert('Failed to create new chat, please try again.')
+      router.push('/chat-room')
       console.log(error)
     }
   }
