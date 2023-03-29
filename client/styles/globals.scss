@@ -15,6 +15,11 @@ body {
   height: 100vh;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+}
+
+main {
+  margin-top: auto;
 }
 
 footer {
