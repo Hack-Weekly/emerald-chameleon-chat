@@ -6,7 +6,10 @@ import {
   HubConnectionBuilder,
   HubConnectionState,
   LogLevel,
+  HttpTransportType
 } from '@microsoft/signalr'
+import { ReadTokensFromLocalStorage } from 'services/authentication/authentication.service'
+
 
 export interface SignalRConnectionOptions {
   logLevel?: LogLevel
@@ -23,15 +26,25 @@ const useSignalR = (hubName: string, options?: SignalRConnectionOptions) => {
 
   useEffect(() => {
     if (hubName === '') return
+    // const connection = new HubConnectionBuilder()
+    //   .withUrl(`/hubs/${hubName}`, options || {})
+    //   .build()
+
     const connection = new HubConnectionBuilder()
-      .withUrl(`/hubs/${hubName}`, options || {})
+      .withUrl(`${process.env.NEXT_PUBLIC_HUB_URL}/${hubName}`, {
+        skipNegotiation: true,
+        transport: HttpTransportType.WebSockets,
+        accessTokenFactory: () => { 
+          return ReadTokensFromLocalStorage().accessToken ?? ''
+        }
+      })
       .build()
 
     connectionRef.current = connection
 
-    return () => {
-      connection.stop()
-    }
+    // return () => {
+    //   connection.stop()
+    // }
   }, [hubName, options])
 
   useEffect(() => {

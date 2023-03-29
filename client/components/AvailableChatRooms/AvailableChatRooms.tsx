@@ -13,12 +13,40 @@ type chatRooms = ChatRoom[]
 
 const AvailableChatRooms = (props: { user: UserDTO }) => {
   const username = JSON.stringify(props?.user?.username)
+  // HubConnection.invoke('GetActiveChatRooms')
+  // connection.on("activeRoomsMessage")
+
+  const [chatRooms, setChatRooms] = useState<string[]>([])
+
+  //first get the HubUrl based on what page we are on
+  const HubUrl = `chatHub`
+
+  //then use the useSignalR hook to connect to the Hub
+  const SignalRConnection = useSignalR(HubUrl)
+  
+  
+
+  // useEffect(() => {
+  //   if (!SignalRConnection) {
+  //     console.log('SignalRConnection is undefined')
+  //     return
+  //   }
+  //   const rooms = SignalRConnection.invoke('GetActiveChatRooms')
+  //   console.log('rooms: ', rooms)
+  //   // SignalRConnection.on('activeRoomsMessage', (room: string) => {
+  //   //   console.log('rooms: ', room)
+  //   //   setChatRooms([...chatRooms, room])
+  //   // })
+  // }, [chatRooms])
+
+  console.log('chat rooms: ', chatRooms)
+
   return (
     <div className={styles.wrapper}>
       <h2>Available Chat Rooms</h2>
       <p>{`Hi, ${username}. Please choose a room to join`}</p>
       <div className={styles.listWrapper}>
-        <ChatRoomList />
+        {/* <ChatRoomList /> */}
         <Link href="/createChat" className={styles.createChatLink}>
           Create Chat Room
         </Link>
@@ -30,48 +58,48 @@ const AvailableChatRooms = (props: { user: UserDTO }) => {
   )
 }
 
-function ChatRoomList() {
-  // HubConnection.invoke('GetActiveChatRooms')
-  // connection.on("activeRoomsMessage")
+// function ChatRoomList() {
+//   // HubConnection.invoke('GetActiveChatRooms')
+//   // connection.on("activeRoomsMessage")
 
-  const [chatRooms, setChatRooms] = useState<string[]>([])
+//   const [chatRooms, setChatRooms] = useState<string[]>([])
 
-  //first get the HubUrl based on what page we are on
-  const HubUrl = `${process.env.NEXT_PUBLIC_HUB_URL}`
+//   //first get the HubUrl based on what page we are on
+//   const HubUrl = `chatHub`
 
-  //then use the useSignalR hook to connect to the Hub
-  const SignalRConnection = useSignalR(HubUrl)
+//   //then use the useSignalR hook to connect to the Hub
+//   const SignalRConnection = useSignalR(HubUrl)
 
-  useEffect(() => {
-    if (!SignalRConnection) {
-      console.log('SignalRConnection is undefined')
-      return
-    }
-    SignalRConnection.invoke('GetActiveChatRooms')
-    SignalRConnection.on("activeRoomsMessage", (message: string) => {
-      setChatRooms([...chatRooms, message])
-    })
-  }, [chatRooms])
+//   useEffect(() => {
+//     if (!SignalRConnection) {
+//       console.log('SignalRConnection is undefined')
+//       return
+//     }
+//     SignalRConnection.invoke('GetActiveChatRooms')
+//     SignalRConnection.on("activeRoomsMessage", (message: string) => {
+//       setChatRooms([...chatRooms, message])
+//     })
+//   }, [chatRooms])
+//   console.log(chatRooms)
 
-
-  return (
-    <ul>
-      {chatRooms.map((room, index) => (
-        <li key={index}>{room}</li>
-      ))}
-    </ul>
-    // room.isActive && (
-    //   <li key={room.creatorId}>
-    //     <Link href={`/chat-room/${room.creatorId}`}>
-    //       <div className={styles.roomInfo}>
-    //         <h3>{room.name}</h3>
-    //         <p>{room.description}</p>
-    //       </div>
-    //     </Link>
-    //   </li>
-    // )
-   )
-}
+//   return (
+//     <ul>
+//       {chatRooms.map((room, index) => (
+//         <li key={index}>{room}</li>
+//       ))}
+//     </ul>
+//     // room.isActive && (
+//     //   <li key={room.creatorId}>
+//     //     <Link href={`/chat-room/${room.creatorId}`}>
+//     //       <div className={styles.roomInfo}>
+//     //         <h3>{room.name}</h3>
+//     //         <p>{room.description}</p>
+//     //       </div>
+//     //     </Link>
+//     //   </li>
+//     // )
+//    )
+// }
 
 
 export default withAuth(AvailableChatRooms)
