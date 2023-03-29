@@ -1,10 +1,7 @@
-import AvailableChatRooms from "@components/AvailableChatRooms/AvailableChatRooms"
-
 const ChatRoomSlug = () => {
   return (
     <div>
-      {/* <h1>Welcome to page ChatRoomSlug</h1> */}
-      <AvailableChatRooms />
+      <h1>Welcome to page ChatRoomSlug</h1>
     </div>
   )
 }
