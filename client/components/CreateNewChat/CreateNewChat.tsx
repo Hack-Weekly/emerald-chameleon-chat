@@ -1,12 +1,15 @@
 'use client'
+
 import Link from 'next/link'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import styles from './CreateNewChat.module.scss'
+import { HttpTransportType, HubConnectionBuilder } from '@microsoft/signalr'
+import { ReadTokensFromLocalStorage } from 'services/authentication/authentication.service'
 
 type CreateChatValues = {
-  name: string
-  description: string
+  name: string,
+  description: string,
 }
 
 export default function CreateNewChat() {
@@ -29,21 +32,25 @@ export default function CreateNewChat() {
     e.preventDefault()
 
     try {
-      const res = await fetch('api/create', {
-        method: 'POST',
-        body: JSON.stringify(formValues),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-      const data = await res.json()
+      const connection = new HubConnectionBuilder()
+        .withUrl(`https://nas.lightshowdepot.com/chatHub`, {
+          skipNegotiation: true,
+          transport: HttpTransportType.WebSockets,
+          accessTokenFactory: () => {
+            return ReadTokensFromLocalStorage().accessToken ?? ''
+          }
+        })
+        .build() 
 
-      if (res.ok) {
+      await connection.start()
+      connection.invoke('CreateChatroom', formValues.name, formValues.description)
+      const connectionArr = Object.entries(connection)
+      if (connectionArr[16][1] === 'Connected') {
         router.push('/chat-room')
-      } else {
-        alert(data.message)
       }
     } catch (error) {
+      alert('Failed to create new chat, please try again.')
+      router.push('/chat-room')
       console.log(error)
     }
   }
