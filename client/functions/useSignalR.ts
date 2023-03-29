@@ -29,9 +29,9 @@ const useSignalR = (hubName: string, options?: SignalRConnectionOptions) => {
 
     connectionRef.current = connection
 
-    return () => {
-      connection.stop()
-    }
+    // return () => {
+    //   connection.stop()
+    // }
   }, [hubName, options])
 
   useEffect(() => {
