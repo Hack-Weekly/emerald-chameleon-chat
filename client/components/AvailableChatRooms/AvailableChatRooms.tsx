@@ -14,10 +14,10 @@ const AvailableChatRooms = (props: { user: UserDTO }) => {
   const username = props?.user?.username
 
   const [chatRooms, setChatRooms] = useState<string[]>([])
-  const [ showChatRoomList, setShowChatRoomList] = useState(false)
+  const [showChatRoomList, setShowChatRoomList] = useState(false)
 
   //first get the HubUrl based on what page we are on
-  const HubUrl = `chatHub`
+  // const HubUrl = `chatHub`
 
   //then use the useSignalR hook to connect to the Hub
   // const SignalRConnection = useSignalR(HubUrl)
@@ -25,7 +25,7 @@ const AvailableChatRooms = (props: { user: UserDTO }) => {
   const handleGetRooms = async () => {
     try {
       const connection = new HubConnectionBuilder()
-        .withUrl(`${process.env.NEXT_PUBLIC_HUB_URL}/${HubUrl}`, {
+        .withUrl(`${process.env.NEXT_PUBLIC_HUB_URL}`, {
           skipNegotiation: true,
           transport: HttpTransportType.WebSockets,
           accessTokenFactory: () => { 
@@ -53,7 +53,7 @@ const AvailableChatRooms = (props: { user: UserDTO }) => {
         <ul>
           {chatRooms.map((room: string, index: number) => (
             <li key={index} className={styles.roomInfo}>
-              {room}
+              <Link href={`/chat-room/${room}`}>{room}</Link>
             </li>
           ))}
         </ul>
@@ -74,16 +74,13 @@ const AvailableChatRooms = (props: { user: UserDTO }) => {
           <button onClick={handleGetRooms} className={styles.seeChatRoomsBtn}>
             See Available Rooms
           </button>}
-      {showChatRoomList && <CreateChatRoomList />}
-      <Link href="/" className={styles.homeLink}>
-        Home
-      </Link>
+        {showChatRoomList && <CreateChatRoomList />}
+        <Link href="/" className={styles.homeLink}>
+          Home
+        </Link>
       </div>
-
     </div>
   )
 }
-
-
 
 export default withAuth(AvailableChatRooms)
