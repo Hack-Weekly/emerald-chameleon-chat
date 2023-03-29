@@ -32,7 +32,7 @@ const LoginForm = () => {
 
   useEffect(() => {
     if (loggedInUser && loggedInUser.username) {
-      router.push('/chat-room')
+      router.push('/profile')
     }
   })
 

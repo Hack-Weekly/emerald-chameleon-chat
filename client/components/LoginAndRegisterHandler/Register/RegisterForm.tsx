@@ -38,7 +38,7 @@ const RegisterForm = () => {
   const router = useRouter()
   useEffect(() => {
     if (loggedInUser && loggedInUser.username) {
-      router.push('/chat-room')
+      router.push('/profile')
     }
   })
 

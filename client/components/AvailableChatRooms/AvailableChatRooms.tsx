@@ -1,50 +1,86 @@
-import React from 'react'
+'use client'
+import React, {  useState } from 'react'
 import styles from './AvailableChatRooms.module.scss'
-import chatRooms from './mockData.json'
 import Link from 'next/link'
 import type { ChatRoom } from 'types/data'
+import withAuth from 'hooks/WithAuth'
+import { UserDTO } from 'services/authentication/types/authentication.type'
+import { ReadTokensFromLocalStorage } from 'services/authentication/authentication.service'
+import { HubConnectionBuilder, HttpTransportType } from '@microsoft/signalr'
 
-type chatRooms = ChatRoom[]
+// type chatRooms = ChatRoom[]
 
-function AvailableChatRooms() {
-  return (
-    <div className={styles.wrapper}>
-      <h2>Available Chat Rooms</h2>
+const AvailableChatRooms = (props: { user: UserDTO }) => {
+  const username = props?.user?.username
+
+  const [chatRooms, setChatRooms] = useState<string[]>([])
+  const [showChatRoomList, setShowChatRoomList] = useState(false)
+
+  //first get the HubUrl based on what page we are on
+  // const HubUrl = `chatHub`
+
+  //then use the useSignalR hook to connect to the Hub
+  // const SignalRConnection = useSignalR(HubUrl)
+
+  const handleGetRooms = async () => {
+    try {
+      const connection = new HubConnectionBuilder()
+        .withUrl(`${process.env.NEXT_PUBLIC_HUB_URL}`, {
+          skipNegotiation: true,
+          transport: HttpTransportType.WebSockets,
+          accessTokenFactory: () => { 
+            return ReadTokensFromLocalStorage().accessToken ?? ''
+          }
+        })
+        .build()
+
+      await connection.start()
+
+      connection.invoke('GetActiveChatRooms')
+      connection.on('activeRoomsMessage', (chatRoomList) => {
+        console.log('chatRoomList: ', chatRoomList)
+        setChatRooms([...chatRoomList])
+        setShowChatRoomList(true)
+      })
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  const CreateChatRoomList = () => {
+    return (
       <div className={styles.listWrapper}>
-        <ChatRoomList />
-        <Link href="/createChat" className={styles.createChatLink}>
-          Create Chat Room
+        <ul>
+          {chatRooms.map((room: string, index: number) => (
+            <li key={index} className={styles.roomInfo}>
+              <Link href={`/chat-room/${room}`}>{room}</Link>
+            </li>
+          ))}
+        </ul>
+        <div className={styles.buttonContainer}>
+          <Link href="/createChat" className={styles.createChatLink}>
+            Create Chat Room
+          </Link>
+          <button onClick={() => setShowChatRoomList(false)}>Cancel</button>
+        </div>
+      </div>
+    )
+}
+
+  return (
+    <div>
+      <div className={styles.wrapper}>
+        {!showChatRoomList &&
+          <button onClick={handleGetRooms} className={styles.seeChatRoomsBtn}>
+            See Available Rooms
+          </button>}
+        {showChatRoomList && <CreateChatRoomList />}
+        <Link href="/" className={styles.homeLink}>
+          Home
         </Link>
       </div>
-      <Link href="/" className={styles.homeLink}>
-        Home
-      </Link>
     </div>
   )
 }
 
-function ChatRoomList() {
-  // const url = `${process.env.NEXT_PUBLIC_API_URL}/chat-room-endpoint`
-  // fetch list of chat rooms
-  // set chatRooms = data.json()
-
-  return (
-    <ul>
-      {chatRooms.map(
-        (room) =>
-          room.isActive && (
-            <li key={room.creatorId}>
-              <Link href={`/chat-room/${room.creatorId}`}>
-                <div className={styles.roomInfo}>
-                  <h3>{room.name}</h3>
-                  <p>{room.description}</p>
-                </div>
-              </Link>
-            </li>
-          )
-      )}
-    </ul>
-  )
-}
-
-export default AvailableChatRooms
+export default withAuth(AvailableChatRooms)
