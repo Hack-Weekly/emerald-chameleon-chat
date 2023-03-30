@@ -1,5 +1,5 @@
 'use client'
-import React, {  useState } from 'react'
+import React, {  useEffect, useState } from 'react'
 import styles from './AvailableChatRooms.module.scss'
 import Link from 'next/link'
 import type { ChatRoom } from 'types/data'
@@ -7,6 +7,7 @@ import withAuth from 'hooks/WithAuth'
 import { UserDTO } from 'services/authentication/types/authentication.type'
 import { ReadTokensFromLocalStorage } from 'services/authentication/authentication.service'
 import { HubConnectionBuilder, HttpTransportType } from '@microsoft/signalr'
+import CreateNewChat from '@components/CreateNewChat/CreateNewChat'
 
 // type chatRooms = ChatRoom[]
 
@@ -15,6 +16,7 @@ const AvailableChatRooms = (props: { user: UserDTO }) => {
 
   const [chatRooms, setChatRooms] = useState<string[]>([])
   const [showChatRoomList, setShowChatRoomList] = useState(false)
+  const [isChatListEmpty, setIsChatListEmpty] = useState(false)
 
   //first get the HubUrl based on what page we are on
   // const HubUrl = `chatHub`
@@ -30,7 +32,7 @@ const AvailableChatRooms = (props: { user: UserDTO }) => {
           transport: HttpTransportType.WebSockets,
           accessTokenFactory: () => { 
             return ReadTokensFromLocalStorage().accessToken ?? ''
-          }
+          },
         })
         .build()
 
@@ -39,6 +41,9 @@ const AvailableChatRooms = (props: { user: UserDTO }) => {
       connection.invoke('GetActiveChatRooms')
       connection.on('activeRoomsMessage', (chatRoomList) => {
         console.log('chatRoomList: ', chatRoomList)
+        if (chatRoomList === '') {
+          setIsChatListEmpty(true)
+        }
         setChatRooms([...chatRoomList])
         setShowChatRoomList(true)
       })
@@ -51,11 +56,15 @@ const AvailableChatRooms = (props: { user: UserDTO }) => {
     return (
       <div className={styles.listWrapper}>
         <ul>
-          {chatRooms.map((room: string, index: number) => (
-            <li key={index} className={styles.roomInfo}>
-              <Link href={`/chat-room/${room}`}>{room}</Link>
-            </li>
-          ))}
+          {!isChatListEmpty ? (
+            chatRooms.map((room: string, index: number) => (
+              <li key={index} className={styles.roomInfo}>
+                <Link href={`/chat-room/${room}`}>{room}</Link>
+              </li>
+            ))
+          ) : (
+            <p>No chat rooms available</p>
+          )}
         </ul>
         <div className={styles.buttonContainer}>
           <Link href="/createChat" className={styles.createChatLink}>
@@ -65,15 +74,16 @@ const AvailableChatRooms = (props: { user: UserDTO }) => {
         </div>
       </div>
     )
-}
+  }
 
   return (
     <div>
       <div className={styles.wrapper}>
-        {!showChatRoomList &&
+        {!showChatRoomList && (
           <button onClick={handleGetRooms} className={styles.seeChatRoomsBtn}>
             See Available Rooms
-          </button>}
+          </button>
+        )}
         {showChatRoomList && <CreateChatRoomList />}
         <Link href="/" className={styles.homeLink}>
           Home
