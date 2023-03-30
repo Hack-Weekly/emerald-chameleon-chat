@@ -1,5 +1,8 @@
 # Emerald Chameleon Chat
 
+https://euphonious-malasada-9f25dd.netlify.app/
+
+#
 This is a backend starter template for our projects. This is a .NET 6 Web API project that utilizes Entity Framework and the repository pattern for our Data Access layer.
 
 # Understanding The Folder Structure
