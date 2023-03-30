@@ -45,12 +45,16 @@ export default function CreateNewChat() {
       await connection.start()
       connection.invoke('CreateChatroom', formValues.name, formValues.description)
       const connectionArr = Object.entries(connection)
+      connection.invoke('GetActiveChatRooms')
+      connection.on('activeRoomsMessage', (chatRoomList) =>
+        chatRoomList.unshift(connectionArr)
+      )
       if (connectionArr[16][1] === 'Connected') {
-        router.push('/chat-room')
+        router.push('/profile')
       }
     } catch (error) {
       alert('Failed to create new chat, please try again.')
-      router.push('/chat-room')
+      router.push('/profile')
       console.log(error)
     }
   }

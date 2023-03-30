@@ -6,6 +6,7 @@ import styles from '@styles/Register.module.scss'
 
 const Profile = (props: { user: UserDTO }) => {
   const username = props?.user?.username
+
   return (
     <div className={styles.pageLayout}>
       <h2>Hi {username}</h2>
